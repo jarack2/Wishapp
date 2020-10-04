@@ -28,14 +28,14 @@ const HomeScreen = (props) => {
         >
           <TouchableHighlight
             style={styles.buttons}
-            onPress={() => props.navigation.navigate('Signup')}
+            onPress={() => props.navigation.navigate('Sign Up')}
           >
             <Text style={styles.buttonLabels}>Sign Up</Text>
           </TouchableHighlight>
           <TouchableHighlight
             overlayColor="#FFFFFF"
             style={styles.buttons}
-            onPress={() => props.navigation.navigate('Signup')}
+            onPress={() => props.navigation.navigate('Login')}
           >
             <Text style={styles.buttonLabels}>Login</Text>
           </TouchableHighlight>

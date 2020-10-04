@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import SignupScreen from './src/screens/SignupScreen';
+import SignUpScreen from './src/screens/SignupScreen';
 import Login from './src/screens/Login';
 import HomeScreen from './src/screens/HomeScreen';
 
@@ -15,7 +15,7 @@ export default function App() {
     <NavigationContainer>
       <AuthStack.Navigator>
         <AuthStack.Screen name="Home" component={HomeScreen} />
-        <AuthStack.Screen name="Signup" component={SignupScreen} />
+        <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
         <AuthStack.Screen name="Login" component={Login} />
       </AuthStack.Navigator>
     </NavigationContainer>
