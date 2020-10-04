@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 
 
 
-const SignupScreen = (props) => {
+const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const image = { url: '../assets/background.png' };
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignupScreen;
+export default Login;

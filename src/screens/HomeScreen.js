@@ -4,7 +4,7 @@ import { TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 
 
-const SignupScreen = (props) => {
+const HomeScreen = (props, { navigation }) => {
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
@@ -20,8 +20,10 @@ const SignupScreen = (props) => {
         <Text style={{ fontSize: '48px', color: 'white', marginLeft: '10px', marginRight: '10px'}}>WishApp</Text>
               <View style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
                 
-                <TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback
+                      onPress={navigation.navigate("Login")}>
                       <Text style={[styles.text, { marginBottom: 20 }]}>Login</Text>
+                      
                 </TouchableWithoutFeedback>
                   
                 <TouchableWithoutFeedback>
@@ -61,14 +63,14 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 24,
-                          backgroundColor: "purple",
-                          textAlign: "center",
-                          padding: 10,
-                          color: "white",
-                          fontWeight: 100,
-                          borderRadius: 20,
-                          marginHorizontal: 20,
+        backgroundColor: "purple",
+        textAlign: "center",
+        padding: 10,
+        color: "white",
+        fontWeight: 100,
+        borderRadius: 20,
+        marginHorizontal: 20,
     }
 });
 
-export default SignupScreen;
+export default HomeScreen;
