@@ -6,7 +6,6 @@ import { StyleSheet } from 'react-native';
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
-  const [name, setName] = useState();
   const [password, setPassword] = useState();
   const image = { url: '../assets/background.png' };
 
@@ -28,12 +27,6 @@ const SignupScreen = (props) => {
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
-          placeholder="Name"
-          placeholderTextColor="#dfdfdf"
-          style={styles.textInput}
-          onChangeText={(text) => setName(text)}
-        />
-        <TextInput
           secureTextEntry
           placeholder="Password..."
           placeholderTextColor="#dfdfdf"
@@ -42,7 +35,7 @@ const SignupScreen = (props) => {
         />
 
         <Button style={{ }}
-          title="Sign Up"
+          title="Login"
           onPress={() => console.log('poop')}
           color="#2196F3"
           />

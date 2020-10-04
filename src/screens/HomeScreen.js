@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Text, TextInput, View, ImageBackground } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { TouchableWithoutFeedback, StyleSheet } from 'react-native';
 
 
 
@@ -18,36 +18,21 @@ const SignupScreen = (props) => {
       >
         
         <Text style={{ fontSize: '48px', color: 'white', marginLeft: '10px', marginRight: '10px'}}>WishApp</Text>
-        <View style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
-        
-        
-        <TextInput
-          placeholder="Email..."
-          placeholderTextColor="#dfdfdf"
-          style={styles.textInput}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          placeholder="Name"
-          placeholderTextColor="#dfdfdf"
-          style={styles.textInput}
-          onChangeText={(text) => setName(text)}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password..."
-          placeholderTextColor="#dfdfdf"
-          style={styles.textInput}
-          onChangeText={(text) => setPassword(text)}
-        />
+              <View style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
+                
+                <TouchableWithoutFeedback>
+                      <Text style={[styles.text, { marginBottom: 20 }]}>Login</Text>
+                </TouchableWithoutFeedback>
+                  
+                <TouchableWithoutFeedback>
+                      <Text style={styles.text}>Sign Up</Text>
+                </TouchableWithoutFeedback>
+              </View>
+              <View style={{ flex:2 }}></View>
 
-        <Button style={{ }}
-          title="Sign Up"
-          onPress={() => console.log('poop')}
-          color="#2196F3"
-          />
-          </View>
-      </ImageBackground>
+            
+            
+        </ImageBackground>
     </>
   );
 };
@@ -73,7 +58,17 @@ const styles = StyleSheet.create({
   },
   Button: {
     fontSize: '24px',
-  }
+    },
+    text: {
+        fontSize: 24,
+                          backgroundColor: "purple",
+                          textAlign: "center",
+                          padding: 10,
+                          color: "white",
+                          fontWeight: 100,
+                          borderRadius: 20,
+                          marginHorizontal: 20,
+    }
 });
 
 export default SignupScreen;
