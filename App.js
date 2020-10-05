@@ -11,23 +11,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 const AuthStack = createStackNavigator();
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <AuthStack.Navigator>
-        <AuthStack.Screen name="Home" component={HomeScreen} />
-        <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
-        <AuthStack.Screen name="Login" component={Login} />
-      </AuthStack.Navigator>
-    </NavigationContainer>
-  );
+  // return <SignupScreen />;
+  //   //return <Login />;
+  return <HomeScreen />;
 }
-
-// export default function App() {
-
-//   //return <SignupScreen />;
-//   //return <Login />;
-//   return <HomeScreen />;
-// }
 
 const styles = StyleSheet.create({
   container: {
