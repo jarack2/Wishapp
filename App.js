@@ -1,31 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import SignupScreen from './src/screens/SignupScreen';
+import SignUpScreen from './src/screens/SignupScreen';
 import Login from './src/screens/Login';
 import HomeScreen from './src/screens/HomeScreen';
 
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-
-import { SignIn } from './src/screens/Screens'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const AuthStack = createStackNavigator();
 
-
-export default () => (
-  <NavigationContainer>
-    <AuthStack.Navigator>
-      
-      <AuthStack.Screen name="Home" component={HomeScreen} />
-      <AuthStack.Screen name="SignIn" component={SignIn} />
-      <AuthStack.Screen name="Login" component={Login} />
-    </AuthStack.Navigator>
-  </NavigationContainer>
-);
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AuthStack.Navigator>
+        <AuthStack.Screen name="Home" component={HomeScreen} />
+        <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
+        <AuthStack.Screen name="Login" component={Login} />
+      </AuthStack.Navigator>
+    </NavigationContainer>
+  );
+}
 
 // export default function App() {
-  
+
 //   //return <SignupScreen />;
 //   //return <Login />;
 //   return <HomeScreen />;
