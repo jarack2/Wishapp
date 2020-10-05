@@ -13,7 +13,11 @@ const AuthStack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <AuthStack.Navigator></AuthStack.Navigator>
+      <AuthStack.Navigator>
+        <AuthStack.Screen name="Home" component={HomeScreen} />
+        <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
+        <AuthStack.Screen name="Login" component={Login} />
+      </AuthStack.Navigator>
     </NavigationContainer>
   );
 }
