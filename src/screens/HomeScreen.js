@@ -6,7 +6,6 @@ import {
   View,
   ImageBackground,
   Text,
-  Button,
   TouchableHighlight,
 } from 'react-native';
 
