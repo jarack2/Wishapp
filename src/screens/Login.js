@@ -11,10 +11,7 @@ const Login = (props) => {
 
   return (
     <>
-      <ImageBackground
-        source={require('../assets/background.png')}
-        style={styles.image}
-      >
+      
         
         <Text style={{ fontSize: '48px', color: 'white', marginLeft: '10px', marginRight: '10px'}}>WishApp</Text>
         <View style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}>
