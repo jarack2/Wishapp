@@ -15,16 +15,56 @@ const LandingPage = (props) => {
       <View
         style={{
           flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
+          flexDirection: 'row-reverse',
         }}
       >
         <ImageBackground
           source={require('../assets/avatar_default.png')}
-          style={
-            (styles.image, { width: 40, height: 40, borderRadius: 40 / 2 })
-          }
+          style={{ width: 40, height: 40, borderRadius: 400 / 2 }}
         ></ImageBackground>
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+      </View>
+
+      {/* Main Content */}
+      <View
+        style={{
+          flex: 20,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+      </View>
+
+      {/* Footer Navigation */}
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
       </View>
     </>
   );
