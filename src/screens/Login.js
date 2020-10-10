@@ -38,7 +38,8 @@ const Login = (props) => {
           <Button
             style={{}}
             title="Login"
-            onPress={() => console.log('poop')}
+            onPress = {() => props.navigation.navigate('LandingPage') }
+            //onPress={() => console.log('poop')}
             color="#2196F3"
           />
         </View>
