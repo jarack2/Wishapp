@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, TextInput, View, ImageBackground } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+import BackButton from '../components/BackButton';
+import TextInput from '../components/TextInput';
+
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
@@ -14,6 +16,9 @@ const SignupScreen = (props) => {
         source={require('../assets/background.png')}
         style={styles.image}
       >
+         <BackButton 
+         onPress={() => props.navigation.navigate('Home')}
+       />
         <Text style={styles.title}>WishApp</Text>
         <View
           style={{
@@ -23,7 +28,7 @@ const SignupScreen = (props) => {
           }}
         >
           <TextInput
-            placeholder="Email..."
+            placeholder="Email"
             placeholderTextColor="#dfdfdf"
             style={styles.textInput}
             onChangeText={(text) => setEmail(text)}
@@ -36,17 +41,17 @@ const SignupScreen = (props) => {
           />
           <TextInput
             secureTextEntry
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#dfdfdf"
             style={styles.textInput}
             onChangeText={(text) => setPassword(text)}
           />
-          <Button
-            style={styles.button}
-            title="Sign Up"
-            onPress={() => console.log('poop')}
-            color="#2196F3"
-          />
+          <TouchableHighlight
+            style={styles.buttons}
+            onPress={() => props.navigation.navigate('Sign Up')}
+          >
+            <Text style={styles.buttonLabels}>Sign Up</Text>
+          </TouchableHighlight>
         </View>
       </ImageBackground>
     </>
@@ -62,18 +67,18 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
   },
-  textInput: {
-    margin: 'auto 10px',
-    alignItems: 'center',
-    fontSize: '24px',
-    fontWeight: '100',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    borderRadius: '10px',
-    color: '#dfdfdf',
+  buttons: {
+    backgroundColor: 'purple',
+    padding: 10,
+    borderRadius: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
   },
-  button: {
-    fontSize: '24px',
+  buttonLabels: {
+    color: 'white',
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
   },
   title: {
     fontSize: '48px',
