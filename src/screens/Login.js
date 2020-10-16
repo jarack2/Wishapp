@@ -38,7 +38,7 @@ const Login = (props) => {
           <Button
             style={{}}
             title="Login"
-            onPress = {() => props.navigation.navigate('LandingPage') }
+            onPress = {() => props.navigation.navigate('Wishful') }
             //onPress={() => console.log('poop')}
             color="#2196F3"
           />
