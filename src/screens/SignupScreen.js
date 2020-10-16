@@ -30,20 +30,17 @@ const SignupScreen = (props) => {
           <TextInput
             placeholder="Email"
             placeholderTextColor="#grey"
-            style={{height: 40, borderColor: 'black', borderWidth: 1, backgroundColor: 'white', borderRadius:10, padding:10}}
             onChangeText={(text) => setEmail(text)}
           />
           <TextInput
             placeholder="Name"
             placeholderTextColor="#grey"
-            style={{height: 40, borderColor: 'black', borderWidth: 1, backgroundColor: 'white', borderRadius:10, padding:10}}
             onChangeText={(text) => setName(text)}
           />
           <TextInput
             secureTextEntry
             placeholder="Password"
             placeholderTextColor="#grey"
-            style={{height: 40, borderColor: 'black', borderWidth: 1, backgroundColor: 'white', borderRadius:10, padding:10}}
             onChangeText={(text) => setPassword(text)}
           />
           <TouchableHighlight

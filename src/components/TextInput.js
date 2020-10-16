@@ -28,7 +28,12 @@ const styles = StyleSheet.create({
     color: '#dfdfdf',
   },
   input: {
-    backgroundColor: "#dfdfdf",
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    padding: 10,
   },
   error: {
     fontSize: 14,

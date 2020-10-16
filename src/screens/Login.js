@@ -28,15 +28,13 @@ const Login = (props) => {
         >
           <TextInput
            placeholder="Email"
-           placeholderTextColor="#grey"
-           style={{height: 40, borderColor: 'black', borderWidth: 1, backgroundColor: 'white', borderRadius:10, padding:10}}
+           placeholderTextColor="#dfdfdf"
            onChangeText={(text) => setPassword(text)}
           />
           <TextInput
             secureTextEntry
             placeholder="Password"
-            placeholderTextColor="#grey"
-           style={{height: 40, borderColor: 'black', borderWidth: 1, backgroundColor: 'white', borderRadius:10, padding:10}}
+            placeholderTextColor="#dfdfdf"
             onChangeText={(text) => setPassword(text)}
           />
           <View style={styles.forgotPassword}>
