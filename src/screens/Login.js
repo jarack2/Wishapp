@@ -4,10 +4,21 @@ import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHig
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
+
+
+const getUserData = (email, password) => {
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .catch((error) => {
+    alert("There was an error: " + error.message);
+    console.log(error.code + ": " + error.message);
+  });
+}
+
 const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const image = { url: '../assets/background.png' };
 
   return (
     <>
@@ -30,7 +41,7 @@ const Login = (props) => {
            placeholder="Email"
            placeholderTextColor="#dfdfdf"
            style={styles.textInput}
-           onChangeText={(text) => setPassword(text)}
+           onChangeText={(text) => setEmail(text)}
           />
           <TextInput
             secureTextEntry
@@ -50,7 +61,7 @@ const Login = (props) => {
           <TouchableHighlight
             overlayColor="#FFFFFF"
             style={styles.buttons}
-            onPress={() => props.navigation.navigate('Login')}
+            onPress={() => getUserData(email, password)}
           >
             <Text style={styles.buttonLabels}>Login</Text>
           </TouchableHighlight>

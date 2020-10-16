@@ -11,7 +11,6 @@ const AuthStack = createStackNavigator();
 
 export default function App() {
   
-
   return (
     <NavigationContainer>
       <AuthStack.Navigator>

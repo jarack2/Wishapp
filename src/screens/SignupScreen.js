@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, View, ImageBackground, TextInput, StyleSheet, TouchableHighlight } from 'react-native';
+import { Button, Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native';
 import BackButton from '../components/BackButton';
-// import TextInput from '../components/TextInput';
-import { uuid } from 'uuidv4';
+import TextInput from '../components/TextInput';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-
-// const checkAndSetEmail = () => console.log("poop"); // email validation
-// const checkAndSetPassword = () => console.log("poop"); // password validation
-
  
-const writeUserData = (userId, name, email, password, imageUrl) => {
-  firebase.db.collection('users').doc(userId).set({
-    name: name,
-    email: email,
-    password: password,
-    profile_picture : imageUrl
+const createUser = (email, password) => {  
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .catch((error) => { 
+    alert("There was an error: " + error.message);
+    console.log(error.code + ": " + error.message);
   });
 }
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
-  const [name, setName] = useState();
   const [password, setPassword] = useState();
-
+  const [signedUp, setSignedUp] = useState();
+  
   return (
     <>
       <ImageBackground
@@ -42,39 +36,29 @@ const SignupScreen = (props) => {
             justifyContent: 'flex-end',
           }}
         >
-         
-          <TextInput
-            placeholder="Name..."
-            placeholderTextColor="#dfdfdf"
-            style={styles.textInput}
-            onChangeText={(text) => setName(text)}
-          />
            <TextInput
             placeholder="Email..."
             placeholderTextColor="#dfdfdf"
-            style={styles.textInput}
             onChangeText={(newEmail) => setEmail(newEmail)}
           />
           <TextInput
             secureTextEntry
             placeholder="Password..."
             placeholderTextColor="#dfdfdf"
-            style={styles.textInput}
             onChangeText={(newPassword) => setPassword(newPassword)}
           />
-          <Button
-            style={styles.button}
-            title="Sign Up"
-            onPress={() => writeUserData(uuid(), name, email, password, null)}
-            color="#2196F3"
-          />
-          {/* <TouchableHighlight
+          <TouchableHighlight
             style={styles.buttons}
             color="#2196F3"
-            onPress={() => writeUserData(uuid(), name, email, password, null)}
+            onPress={() => { 
+                setSignedUp(createUser(email, password));
+                console.log(signedUp);
+              }
+            }
           >
             <Text style={styles.buttonLabels}>Sign Up</Text>
-          </TouchableHighlight> */}
+          </TouchableHighlight>
+        {/* {signedUp ? <Text style={styles.buttonLabels}>{signedUp}</Text> : null} */}
         </View>
       </ImageBackground>
     </>
