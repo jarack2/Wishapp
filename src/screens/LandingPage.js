@@ -18,10 +18,10 @@ const LandingPage = (props) => {
           flexDirection: 'row-reverse',
         }}
       >
-        <ImageBackground
+        <Image
           source={require('../assets/avatar_default.png')}
-          style={{ width: 40, height: 40, borderRadius: 400 / 2 }}
-        ></ImageBackground>
+          style={{ width: 40, height: 40, borderRadius: 400 / 2, marginHorizontal: 10}}
+        ></Image>
         <View
           style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
         />
