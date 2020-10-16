@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import SignUpScreen from './src/screens/SignupScreen';
@@ -11,6 +10,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 const AuthStack = createStackNavigator();
 
 export default function App() {
+  
+
   return (
     <NavigationContainer>
       <AuthStack.Navigator>

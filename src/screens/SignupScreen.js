@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, TextInput, View, ImageBackground } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { Button, Text, TextInput, View, ImageBackground, StyleSheet} from 'react-native';
+import { uuid } from 'uuidv4';
+
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
+
+// const checkAndSetEmail = () => console.log("poop"); // email validation
+// const checkAndSetPassword = () => console.log("poop"); // password validation
+
+ 
+const writeUserData = (userId, name, email, password, imageUrl) => {
+  firebase.db.collection('users').doc(userId).set({
+    name: name,
+    email: email,
+    password: password,
+    profile_picture : imageUrl
+  });
+}
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
-  const image = { url: '../assets/background.png' };
 
   return (
     <>
@@ -22,29 +37,30 @@ const SignupScreen = (props) => {
             justifyContent: 'flex-end',
           }}
         >
-          <TextInput
-            placeholder="Email..."
-            placeholderTextColor="#dfdfdf"
-            style={styles.textInput}
-            onChangeText={(text) => setEmail(text)}
-          />
+         
           <TextInput
             placeholder="Name"
             placeholderTextColor="#dfdfdf"
             style={styles.textInput}
             onChangeText={(text) => setName(text)}
           />
+           <TextInput
+            placeholder="Email..."
+            placeholderTextColor="#dfdfdf"
+            style={styles.textInput}
+            onChangeText={(newEmail) => setEmail(newEmail)}
+          />
           <TextInput
             secureTextEntry
             placeholder="Password..."
             placeholderTextColor="#dfdfdf"
             style={styles.textInput}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(newPassword) => setPassword(newPassword)}
           />
           <Button
             style={styles.button}
             title="Sign Up"
-            onPress={() => console.log('poop')}
+            onPress={() => writeUserData(uuid(), name, email, password, null)}
             color="#2196F3"
           />
         </View>
