@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native';
-import BackButton from '../components/BackButton';
-import TextInput from '../components/TextInput';
+import { TextInput, BackButton } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';

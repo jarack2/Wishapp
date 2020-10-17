@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+import React, { useState } from 'react';
+import { 
+  Text, 
+  View, 
+  ImageBackground, 
+  Modal, 
+  TouchableOpacity, 
+  StyleSheet, 
+  TouchableHighlight 
+} from 'react-native';
 
-import TextInput from '../components/TextInput';
-import BackButton from '../components/BackButton';
+import {
+  TextInput, 
+  BackButton
+} from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -19,9 +29,10 @@ const getUserData = (email, password) => {
 const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  // const [forgotPasswordModal, setModalVisible] = useState(false);
 
   return (
-    <>
+    <View style={styles.container}>
       <ImageBackground
         source={require('../assets/background.png')}
         style={styles.image}
@@ -48,6 +59,7 @@ const Login = (props) => {
             placeholderTextColor="#dfdfdf"
             onChangeText={(text) => setPassword(text)}
           />
+          {/* <Modal></Modal> */}
           <View style={styles.forgotPassword}>
            <TouchableOpacity
              onPress={() => navigation.navigate('')}
@@ -65,7 +77,7 @@ const Login = (props) => {
           </TouchableHighlight>
         </View>
       </ImageBackground>
-    </>
+    </View>
   );
 };
 
@@ -102,6 +114,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
+  container: {
+    flex: 1
+  }
 });
 
 export default Login;
