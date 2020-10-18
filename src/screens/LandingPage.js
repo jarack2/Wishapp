@@ -129,5 +129,5 @@ const styles = StyleSheet.create({
     fontSize: 40,
   }
 });
-// Comment
+// Comment #1
 export default LandingPage;
