@@ -11,12 +11,24 @@ const createUser = (email, password) => {
     alert("There was an error: " + error.message);
     console.log(error.code + ": " + error.message);
   });
+  
+  if (firebase.auth().currentUser) return true;
+  else return false;
 }
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [signedUp, setSignedUp] = useState();
+  const [errorMessage, seterrorMessage] = useState();
+  
+  useEffect(() => {
+    if (firebase.auth().currentUser) {
+      firebase.auth().signOut().catch((error) => {
+        alert("There was an error: " + error.message);
+        console.log(error.code + ": " + error.message);
+      });
+    }
+  });
   
   return (
     <>
@@ -28,6 +40,8 @@ const SignupScreen = (props) => {
          onPress={() => props.navigation.navigate('Home')}
        />
         <Text style={styles.title}>WishApp</Text>
+        {errorMessage ?
+          <Text style={styles.error}>{errorMessage}</Text> : null}
         <View
           style={{
             flex: 1,
@@ -49,15 +63,17 @@ const SignupScreen = (props) => {
           <TouchableHighlight
             style={styles.buttons}
             color="#2196F3"
-            onPress={() => { 
-                setSignedUp(createUser(email, password));
-                console.log(signedUp);
+            onPress={() => {
+              if (createUser(email, password)) {
+                props.navigation.navigate('Wishful');            
               }
-            }
+              else {
+                seterrorMessage("There was an error creating your account. Please try again.");
+              }
+            }} 
           >
             <Text style={styles.buttonLabels}>Sign Up</Text>
           </TouchableHighlight>
-        {/* {signedUp ? <Text style={styles.buttonLabels}>{signedUp}</Text> : null} */}
         </View>
       </ImageBackground>
     </>
@@ -92,6 +108,18 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: '48px',
     textAlign: 'center',
+  },
+  success: {
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+    color: "green",
+  },
+  error: {
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+    color: "red",
   },
 });
 
