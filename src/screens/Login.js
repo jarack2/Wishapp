@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
 
 import TextInput from '../components/TextInput';
@@ -48,7 +48,7 @@ const Login = (props) => {
           <TouchableHighlight
             overlayColor="#FFFFFF"
             style={styles.buttons}
-            onPress={() => props.navigation.navigate('Login')}
+            onPress={() => onPress = {() => props.navigation.navigate('Wishful') }}
           >
             <Text style={styles.buttonLabels}>Login</Text>
           </TouchableHighlight>
