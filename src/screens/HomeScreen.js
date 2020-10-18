@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+
 const HomeScreen = (props) => {
   const image = { url: '../assets/background.png' };
 
