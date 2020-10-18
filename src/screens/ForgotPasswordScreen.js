@@ -24,14 +24,18 @@ const ForgotPasswordScreen = ({ props }) => {
     <ImageBackground
         source={require('../assets/background.png')}
         style={styles.image}
-      ></ImageBackground>
-      <BackButton goBack={() => navigation.navigate('Login')} />
+      >
+     <BackButton 
+         onPress={() => props.navigation.navigate('Login')}
+       />
 
-      <Logo />
+  
 
-      <Header>Restore Password</Header>
+      <Text style={styles.title}>Reset Password</Text>
 
       <TextInput
+        placeholder="Email"
+        placeholderTextColor="#dfdfdf"
         label="E-mail address"
         returnKeyType="done"
         value={email.value}
@@ -54,23 +58,28 @@ const ForgotPasswordScreen = ({ props }) => {
 
           <View style={styles.back}>
            <TouchableOpacity
-             onPress={() => navigation.navigate('LoginScreen')}
+             onPress={() => props.navigation.navigate('Login')}
            >
             <Text style={styles.label}>← Back to login</Text>
            </TouchableOpacity>
           </View>
+          </ImageBackground>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-header: {
-        fontSize: '48px',
-        color: 'white',
-        margin: '48px',
-        textAlign: 'center', 
-        marginVertical: '50px'
-       },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  title: {
+    fontSize: '48px',
+    color: 'white',
+    margin: '48px',
+    textAlign: 'center', 
+    marginVertical: '50px'
+  },
   label: {
     color: 'red',
   },
@@ -93,6 +102,7 @@ header: {
     textAlign: 'center',
     marginBottom: 24,
   },
+ 
 });
 
 export default memo(ForgotPasswordScreen);
