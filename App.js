@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import SignUpScreen from './src/screens/SignupScreen';
 import Login from './src/screens/Login';
 import HomeScreen from './src/screens/HomeScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -17,7 +18,8 @@ export default function App() {
         <AuthStack.Screen name="Home" component={HomeScreen} />
         <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
         <AuthStack.Screen name="Login" component={Login} />
-      </AuthStack.Navigator>
+        <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      </AuthStack.Navigator> 
     </NavigationContainer>
   );
 }
@@ -28,5 +30,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
 });
