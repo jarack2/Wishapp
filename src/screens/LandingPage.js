@@ -5,38 +5,77 @@ import {
   TextInput,
   View,
   ImageBackground,
+  Dimensions,
   Image,
   StyleSheet,
   SafeAreaView,
   ScrollView,
 } from 'react-native';
 
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+
+
+const data = {
+  labels: ["Wish Completion"], // optional
+  data: [0.4]
+};
+
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+
+const chartConfig = {
+  backgroundGradientFrom: "#2196F3",
+  backgroundGradientFromOpacity: 1,
+  backgroundGradientTo: "#2196F3",
+  backgroundGradientToOpacity: 1,
+  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+  labelOffset: 0,
+  style: {
+    borderRadius: 10
+  },
+};
+
 const LandingPage = (props) => {
   return (
     <>
+           {/* Main Content */}
+      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
       <View
         style={{
           flex: 1,
-          flexDirection: 'row-reverse',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Image
           source={require('../assets/avatar_default.png')}
-          style={{ width: 40, height: 40, borderRadius: 400 / 2, marginHorizontal: 10}}
+          style={{ width: screenHeight/4, height: screenHeight/4, borderRadius: 400 / 2, marginHorizontal: 10}}
         ></Image>
-        <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
-        />
+
       </View>
 
-      {/* Main Content */}
-      <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
         <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+          style={{ width: screenWidth, height: 40, backgroundColor: 'powderblue' }}
         />
-        <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        <ProgressChart
+          data={data}
+          width={screenWidth}
+          height={screenHeight/2}
+          strokeWidth={10}
+          radius={50}
+          chartConfig={chartConfig}
+          hideLegend={false}
         />
         <View
           style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
@@ -66,6 +105,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginHorizontal: 15,
+    backgroundColor: "powderblue"
   },
   text: {
     fontSize: 40,
