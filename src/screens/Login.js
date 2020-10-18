@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Text, TextInput, View, ImageBackground } from 'react-native';
-import { StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+
+import TextInput from '../components/TextInput';
+import BackButton from '../components/BackButton';
 
 const Login = (props) => {
   const [email, setEmail] = useState();
@@ -13,6 +15,9 @@ const Login = (props) => {
         source={require('../assets/background.png')}
         style={styles.image}
       >
+       <BackButton 
+         onPress={() => props.navigation.navigate('Home')}
+       />
         <Text style={styles.title}>WishApp</Text>
         <View
           style={{
@@ -22,26 +27,31 @@ const Login = (props) => {
           }}
         >
           <TextInput
-            placeholder="Email..."
-            placeholderTextColor="#dfdfdf"
-            style={styles.textInput}
-            onChangeText={(text) => setEmail(text)}
+           placeholder="Email"
+           placeholderTextColor="#dfdfdf"
+           onChangeText={(text) => setPassword(text)}
           />
           <TextInput
             secureTextEntry
-            placeholder="Password..."
+            placeholder="Password"
             placeholderTextColor="#dfdfdf"
-            style={styles.textInput}
             onChangeText={(text) => setPassword(text)}
           />
+          <View style={styles.forgotPassword}>
+           <TouchableOpacity
+             onPress={() => navigation.navigate('')}
+           >
+            <Text style={styles.label}>Forgot your password?</Text>
+           </TouchableOpacity>
+          </View>
 
-          <Button
-            style={{}}
-            title="Login"
-            onPress = {() => props.navigation.navigate('Wishful') }
-            //onPress={() => console.log('poop')}
-            color="#2196F3"
-          />
+          <TouchableHighlight
+            overlayColor="#FFFFFF"
+            style={styles.buttons}
+            onPress={() => onPress = {() => props.navigation.navigate('Wishful') }}
+          >
+            <Text style={styles.buttonLabels}>Login</Text>
+          </TouchableHighlight>
         </View>
       </ImageBackground>
     </>
@@ -49,33 +59,37 @@ const Login = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
   image: {
     flex: 1,
     resizeMode: 'cover',
   },
-  textInput: {
-    marginLeft: '10px',
-    marginRight: '10px',
-    alignItems: 'center',
-    fontSize: '24px',
-    fontWeight: '100',
-    borderStyle: 'solid',
-    borderColor: 'white',
-    borderRadius: '10px',
-    color: '#dfdfdf',
-  },
-  Button: {
-    fontSize: '24px',
-  },
   title: {
     fontSize: '48px',
     color: 'white',
-    marginLeft: '10px',
-    marginRight: '10px',
+    margin: '48px',
+    textAlign: 'center', 
+    marginVertical: '50px'
+  },
+  label: {
+    color: 'red',
+  },
+  forgotPassword: {
+    width: '100%',
+    textAlign: 'center',
+    marginBottom: 24,
+  },
+  buttons: {
+    backgroundColor: 'purple',
+    padding: 10,
+    borderRadius: 20,
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  buttonLabels: {
+    color: 'white',
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
   },
 });
 
