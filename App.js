@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import SignUpScreen from './src/screens/SignupScreen';
@@ -25,6 +24,7 @@ function TabNav() {
 }
 
 export default function App() {
+  
   return (
     <NavigationContainer>
       <AuthStack.Navigator>        
@@ -35,9 +35,6 @@ export default function App() {
       </AuthStack.Navigator>
     </NavigationContainer> 
   );
-
-  
-  
 }
 
 const styles = StyleSheet.create({

@@ -1,25 +1,48 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+import { Button, Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
+ 
+const createUser = (email, password) => {  
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .catch((error) => { 
+    alert("There was an error: " + error.message);
+    console.log(error.code + ": " + error.message);
+  });
+  
+  if (firebase.auth().currentUser) return true;
+  else return false;
+}
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
-  const [name, setName] = useState();
   const [password, setPassword] = useState();
-  const image = { url: '../assets/background.png' };
-
+  const [errorMessage, seterrorMessage] = useState();
+  
+  useEffect(() => {
+    if (firebase.auth().currentUser) {
+      firebase.auth().signOut().catch((error) => {
+        alert("There was an error: " + error.message);
+        console.log(error.code + ": " + error.message);
+      });
+    }
+  });
+  
   return (
     <>
       <ImageBackground
         source={require('../assets/background.png')}
         style={styles.image}
       >
-         <BackButton 
+        <BackButton 
          onPress={() => props.navigation.navigate('Home')}
        />
         <Text style={styles.title}>WishApp</Text>
+        {errorMessage ?
+          <Text style={styles.error}>{errorMessage}</Text> : null}
         <View
           style={{
             flex: 1,
@@ -27,25 +50,28 @@ const SignupScreen = (props) => {
             justifyContent: 'flex-end',
           }}
         >
-          <TextInput
-            placeholder="Email"
-            placeholderTextColor="#grey"
-            onChangeText={(text) => setEmail(text)}
-          />
-          <TextInput
-            placeholder="Name"
-            placeholderTextColor="#grey"
-            onChangeText={(text) => setName(text)}
+           <TextInput
+            placeholder="Email..."
+            placeholderTextColor="#dfdfdf"
+            onChangeText={(newEmail) => setEmail(newEmail)}
           />
           <TextInput
             secureTextEntry
-            placeholder="Password"
-            placeholderTextColor="#grey"
-            onChangeText={(text) => setPassword(text)}
+            placeholder="Password..."
+            placeholderTextColor="#dfdfdf"
+            onChangeText={(newPassword) => setPassword(newPassword)}
           />
           <TouchableHighlight
             style={styles.buttons}
-            onPress={() => props.navigation.navigate('Sign Up')}
+            color="#2196F3"
+            onPress={() => {
+              if (createUser(email, password)) {
+                props.navigation.navigate('Wishful');            
+              }
+              else {
+                seterrorMessage("There was an error creating your account. Please try again.");
+              }
+            }} 
           >
             <Text style={styles.buttonLabels}>Sign Up</Text>
           </TouchableHighlight>
@@ -54,6 +80,7 @@ const SignupScreen = (props) => {
     </>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -82,6 +109,18 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: '48px',
     textAlign: 'center',
+  },
+  success: {
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+    color: "green",
+  },
+  error: {
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+    color: "red",
   },
 });
 
