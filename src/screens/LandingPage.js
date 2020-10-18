@@ -21,6 +21,11 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 
+// if (firebase.auth().currentUser) {
+//   return "successfully logged in";
+// }
+// const [message, setMessage] = useState();
+// {message ? <Text style={styles.buttonLabels}>{message}</Text> : null}
 
 const data = {
   labels: ["Wish Completion"], // optional

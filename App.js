@@ -35,9 +35,6 @@ export default function App() {
       </AuthStack.Navigator>
     </NavigationContainer> 
   );
-
-  
-  
 }
 
 const styles = StyleSheet.create({

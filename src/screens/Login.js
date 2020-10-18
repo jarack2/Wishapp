@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHighlight } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { 
+  ImageBackground,
+  StyleSheet, 
+  Text,
+  TouchableHighlight,
+  TouchableOpacity, 
+  View
+} from 'react-native';
 
 import TextInput from '../components/TextInput';
-import BackButton from '../components/BackButton';
+// import BackButton from '../components/BackButton';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -14,22 +21,37 @@ const getUserData = (email, password) => {
     alert("There was an error: " + error.message);
     console.log(error.code + ": " + error.message);
   });
+  
+  if (firebase.auth().currentUser) return true;
+  else return false;
 }
 
 const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [errorMessage, seterrorMessage] = useState();
 
+  useEffect(() => {
+    if (firebase.auth().currentUser) {
+      firebase.auth().signOut().catch((error) => {
+        alert("There was an error: " + error.message);
+        console.log(error.code + ": " + error.message);
+      });
+    }
+  });
+  
   return (
-    <>
+    <View style={styles.container}>
+  
       <ImageBackground
         source={require('../assets/background.png')}
         style={styles.image}
       >
-       <BackButton 
+       {/* <BackButton 
          onPress={() => props.navigation.navigate('Home')}
-       />
+       /> */}
         <Text style={styles.title}>WishApp</Text>
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
         <View
           style={{
             flex: 1,
@@ -37,6 +59,7 @@ const Login = (props) => {
             justifyContent: 'flex-end',
           }}
         >
+         
           <TextInput
            placeholder="Email"
            placeholderTextColor="#dfdfdf"
@@ -59,13 +82,20 @@ const Login = (props) => {
           <TouchableHighlight
             overlayColor="#FFFFFF"
             style={styles.buttons}
-            onPress={() => getUserData(email, password)}
+            onPress={() => {
+              if (getUserData(email, password)) {
+                props.navigation.navigate('Wishful');            
+              }
+              else {
+                seterrorMessage("There was an error logging in. Please try Again.");
+              }
+            }} 
           >
             <Text style={styles.buttonLabels}>Login</Text>
           </TouchableHighlight>
         </View>
       </ImageBackground>
-    </>
+    </View>
   );
 };
 
@@ -98,6 +128,15 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+  },
+  container: {
+    flex: 1
+  },
+  error: {
+    color: 'red',
     fontWeight: 100,
     textAlign: 'center',
     fontSize: 24,
