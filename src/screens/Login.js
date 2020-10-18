@@ -8,12 +8,13 @@ import {
   View
 } from 'react-native';
 
-import TextInput from '../components/TextInput';
-// import BackButton from '../components/BackButton';
+import {
+  TextInput, 
+  BackButton
+} from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-
 
 const getUserData = (email, password) => {
   firebase.auth().signInWithEmailAndPassword(email, password)
@@ -42,7 +43,6 @@ const Login = (props) => {
   
   return (
     <View style={styles.container}>
-  
       <ImageBackground
         source={require('../assets/background.png')}
         style={styles.image}
@@ -71,6 +71,7 @@ const Login = (props) => {
             placeholderTextColor="#dfdfdf"
             onChangeText={(text) => setPassword(text)}
           />
+          {/* <Modal></Modal> */}
           <View style={styles.forgotPassword}>
            <TouchableOpacity
              onPress={() => navigation.navigate('')}

@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { TouchableOpacity, Image, StyleSheet } from 'react-native';
-import { getStatusBarHeight } from 'react-native';
 
 const BackButton = ({ goBack }) => (
   <TouchableOpacity onPress={goBack} style={styles.container}>
@@ -20,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(BackButton);
+export default BackButton;
