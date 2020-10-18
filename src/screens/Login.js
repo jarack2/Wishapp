@@ -59,26 +59,22 @@ const Login = (props) => {
             justifyContent: 'flex-end',
           }}
         >
-         
-          <TextInput
-           placeholder="Email"
-           placeholderTextColor="#dfdfdf"
-           onChangeText={(text) => setEmail(text)}
-          />
-          <TextInput
-            secureTextEntry
-            placeholder="Password"
-            placeholderTextColor="#dfdfdf"
-            onChangeText={(text) => setPassword(text)}
-          />
-          {/* <Modal></Modal> */}
-          <View style={styles.forgotPassword}>
-           <TouchableOpacity
-             onPress={() => navigation.navigate('')}
-           >
-            <Text style={styles.label}>Forgot your password?</Text>
-           </TouchableOpacity>
-          </View>
+        <TextInput
+         placeholder="Email"
+         placeholderTextColor="#dfdfdf"
+         onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          secureTextEntry
+          placeholder="Password"
+          placeholderTextColor="#dfdfdf"
+          onChangeText={(text) => setPassword(text)}
+        />
+       <View style={styles.forgotPassword}>
+         <TouchableOpacity onPress={() => props.navigation.navigate('ForgotPassword')}>
+         <Text style={styles.label}>Forgot your password?</Text>
+         </TouchableOpacity>
+        </View>
 
           <TouchableHighlight
             overlayColor="#FFFFFF"
@@ -143,5 +139,5 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 });
-
+    
 export default Login;

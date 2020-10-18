@@ -5,6 +5,7 @@ import Login from './src/screens/Login';
 import HomeScreen from './src/screens/HomeScreen';
 import LandingPage from './src/screens/LandingPage';
 import WishScreen from './src/screens/WishScreen';
+import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -31,6 +32,7 @@ export default function App() {
         <AuthStack.Screen name="Home" component={HomeScreen} />
         <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
         <AuthStack.Screen name="Login" component={Login} />        
+        <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <AuthStack.Screen name="Wishful" component={TabNav} />
       </AuthStack.Navigator>
     </NavigationContainer> 
