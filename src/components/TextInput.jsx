@@ -1,7 +1,6 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { TextInput as Input } from 'react-native';
-
 
 const TextInput = ({ errorText, ...props }) => (
   <View style={styles.container}>
@@ -28,7 +27,12 @@ const styles = StyleSheet.create({
     color: '#dfdfdf',
   },
   input: {
-    backgroundColor: "#dfdfdf",
+    height: 40,
+    borderColor: 'black',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    padding: 10,
   },
   error: {
     fontSize: 14,
@@ -38,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(TextInput);
+export default TextInput;

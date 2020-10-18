@@ -8,15 +8,20 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-navigation/bottom-tabs": "^5.9.2",
     "@react-navigation/native": "5.7.5",
     "@react-navigation/stack": "5.9.2",
     "expo": "~39.0.2",
     "expo-status-bar": "~1.0.2",
+    "firebase": "7.9.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
+    "react-native-chart-kit": "^6.6.1",
     "react-native-dotenv": "^2.4.1",
     "react-native-screens": "~2.10.`",
+    "react-native-svg": "^12.1.0",
+    "react-native-svg-charts": "5.4.0",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {

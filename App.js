@@ -32,8 +32,8 @@ export default function App() {
         <AuthStack.Screen name="Home" component={HomeScreen} />
         <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
         <AuthStack.Screen name="Login" component={Login} />        
-        <AuthStack.Screen name="Wishful" component={TabNav} />
         <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <AuthStack.Screen name="Wishful" component={TabNav} />
       </AuthStack.Navigator>
     </NavigationContainer> 
   );
