@@ -3,11 +3,26 @@ import { Text, View, ImageBackground, TouchableOpacity, StyleSheet, TouchableHig
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
 
-const ForgotPasswordScreen = ({ props }) => {
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const image = { url: '../assets/background.png' };
+const reset = (email) => {
+  let result;
+  result = firebase.auth().sendPasswordResetEmail(email).then(() => {
+  return "A password reset email has been sent to " + email + ". Please check your email.";
+  }).catch((error) => {
+    alert("There was an error: " + error.message);
+    console.log(error.code + ": " + error.message);
+  }) 
+  return result;
+}
 
+const ForgotPasswordScreen = (props) => {
+  const [email, setEmail] = useState();
+  const [errorMessage, setErrorMessage] = useState();
+  const [successMessage, setSuccessMessage] = useState();
+
+  
   const _onSendPressed = () => {
     const emailError = emailValidator(email.value);
 
@@ -28,42 +43,49 @@ const ForgotPasswordScreen = ({ props }) => {
      <BackButton 
          onPress={() => props.navigation.navigate('Login')}
        />
-
-  
-
-      <Text style={styles.title}>Reset Password</Text>
-
+      {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+      {successMessage ? <Text style={styles.success}>{successMessage}</Text> : null}
+      <Text style={styles.title}>WishApp</Text>
+      <Text style={styles.subtitle}>Reset Password</Text>
+      
       <TextInput
         placeholder="Email"
         placeholderTextColor="#dfdfdf"
         label="E-mail address"
         returnKeyType="done"
-        value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
+        onChangeText={text => setEmail(text)}
         autoCapitalize="none"
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
       />
 
-          <TouchableHighlight
-            overlayColor="#FFFFFF"
-            style={styles.buttons}
-            onPress={() => props.navigation.navigate('Login')}
-          >
-            <Text style={styles.buttonLabels}>RESET</Text>
-          </TouchableHighlight>
+      <TouchableHighlight
+        overlayColor="#FFFFFF"
+        style={styles.buttons}
+        onPress={ async () => {
+          let result = await reset(email);
+          if (result) {
+            setSuccessMessage(result);
+            setErrorMessage("");           
+          }
+          else {
+            setErrorMessage("An error has occured. Please try again.");
+            setSuccessMessage("");
+          }
+        }}
+      >
+        <Text style={styles.buttonLabels}>Reset</Text>
+      </TouchableHighlight>
 
-          <View style={styles.back}>
-           <TouchableOpacity
-             onPress={() => props.navigation.navigate('Login')}
-           >
-            <Text style={styles.label}>← Back to login</Text>
-           </TouchableOpacity>
-          </View>
-          </ImageBackground>
+      <View style={styles.back}>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Login')}
+        >
+        <Text style={styles.label}>← Back to login</Text>
+        </TouchableOpacity>
+      </View>
+      </ImageBackground>
     </>
   );
 };
@@ -79,6 +101,13 @@ const styles = StyleSheet.create({
     margin: '48px',
     textAlign: 'center', 
     marginVertical: '50px'
+  },
+  subtitle: {
+    fontSize: '32px',
+    color: 'white',
+    margin: '12px',
+    textAlign: 'center', 
+    marginVertical: '12px'
   },
   label: {
     color: 'red',
@@ -96,12 +125,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
-
   back: {
     width: '100%',
     textAlign: 'center',
     marginBottom: 24,
   },
+  error: {
+    color: 'white',
+    backgroundColor: 'red',
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+  },
+  success: {
+    color: 'white',
+    backgroundColor: 'green',
+    fontWeight: 100,
+    textAlign: 'center',
+    fontSize: 24,
+  }
  
 });
 
