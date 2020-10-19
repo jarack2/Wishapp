@@ -29,9 +29,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthStack.Navigator>        
-        <AuthStack.Screen name="Home" component={HomeScreen} />
-        <AuthStack.Screen name="Sign Up" component={SignUpScreen} />
-        <AuthStack.Screen name="Login" component={Login} />        
+        <AuthStack.Screen name="Home" component={HomeScreen} options={{title: "Home", headerShown: false}}/>
+        <AuthStack.Screen name="Sign Up" component={SignUpScreen} options={{title: "Sign Up", headerShown: false}}/>
+        <AuthStack.Screen name="Login" component={Login} options={{title: "Home", headerShown: false}} />        
         <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <AuthStack.Screen name="Wishful" component={TabNav} />
       </AuthStack.Navigator>
