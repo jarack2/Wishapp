@@ -47,11 +47,11 @@ const Login = (props) => {
         source={require('../assets/background.png')}
         style={styles.image}
       >
-       {/* <BackButton 
-         onPress={() => props.navigation.navigate('Home')}
-       /> */}
-        <Text style={styles.title}>WishApp</Text>
         {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+        <BackButton 
+         onPress={() => props.navigation.navigate('Home')}
+        />
+        <Text style={styles.title}>WishApp</Text>
         <View
           style={{
             flex: 1,
@@ -61,13 +61,13 @@ const Login = (props) => {
         >
         <TextInput
          placeholder="Email"
-         placeholderTextColor="#dfdfdf"
+         placeholderTextColor="#838383"
          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           secureTextEntry
           placeholder="Password"
-          placeholderTextColor="#dfdfdf"
+          placeholderTextColor="#838383"
           onChangeText={(text) => setPassword(text)}
         />
        <View style={styles.forgotPassword}>
@@ -84,7 +84,7 @@ const Login = (props) => {
                 props.navigation.navigate('Wishful');            
               }
               else {
-                seterrorMessage("There was an error logging in. Please try Again.");
+                seterrorMessage("There was an error logging in. Please try again.");
               }
             }} 
           >
@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: '48px',
     color: 'white',
-    margin: '48px',
     textAlign: 'center', 
-    marginVertical: '50px'
+    marginVertical: '80px',
+    borderColor: 'red'
   },
   label: {
     color: 'red',
@@ -133,7 +133,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   error: {
-    color: 'red',
+    color: 'white',
+    backgroundColor: 'red',
     fontWeight: 100,
     textAlign: 'center',
     fontSize: 24,

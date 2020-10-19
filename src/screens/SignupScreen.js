@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native';
+import { Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native';
 import { TextInput, BackButton } from '../components';
 
 import firebase from '../../firebaseConfig';
@@ -37,11 +37,10 @@ const SignupScreen = (props) => {
         style={styles.image}
       >
         <BackButton 
-         onPress={() => props.navigation.navigate('Home')}
+          onPress={() => props.navigation.navigate('Home')}
        />
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
         <Text style={styles.title}>WishApp</Text>
-        {errorMessage ?
-          <Text style={styles.error}>{errorMessage}</Text> : null}
         <View
           style={{
             flex: 1,
@@ -50,14 +49,14 @@ const SignupScreen = (props) => {
           }}
         >
            <TextInput
-            placeholder="Email..."
-            placeholderTextColor="#dfdfdf"
+            placeholder="Email"
+            placeholderTextColor="#838383"
             onChangeText={(newEmail) => setEmail(newEmail)}
           />
           <TextInput
             secureTextEntry
-            placeholder="Password..."
-            placeholderTextColor="#dfdfdf"
+            placeholder="Password"
+            placeholderTextColor="#838383"
             onChangeText={(newPassword) => setPassword(newPassword)}
           />
           <TouchableHighlight
@@ -106,20 +105,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: '48px',
     color: 'white',
-    margin: '48px',
+    marginVertical: '80px',
     textAlign: 'center',
-  },
-  success: {
-    fontWeight: 100,
-    textAlign: 'center',
-    fontSize: 24,
-    color: "green",
   },
   error: {
+    color: 'white',
+    backgroundColor: 'red',
     fontWeight: 100,
     textAlign: 'center',
     fontSize: 24,
-    color: "red",
   },
 });
 
