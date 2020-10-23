@@ -21,14 +21,20 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
 // if (firebase.auth().currentUser) {
 //   return "successfully logged in";
 // }
 // const [message, setMessage] = useState();
 // {message ? <Text style={styles.buttonLabels}>{message}</Text> : null}
 
+
+const uid = firebase.auth().currentUser;
+console.log(uid);
+
 const data = {
-  labels: ["Wish Completion"], // optional
+  labels: ["wishes"], // optional
   data: [0.4]
 };
 
@@ -37,9 +43,9 @@ const screenHeight = Dimensions.get("window").height;
 
 const chartConfig = {
   backgroundGradientFrom: "#2196F3",
-  backgroundGradientFromOpacity: 1,
+  backgroundGradientFromOpacity: .4,
   backgroundGradientTo: "#2196F3",
-  backgroundGradientToOpacity: 1,
+  backgroundGradientToOpacity: .4,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -51,51 +57,53 @@ const chartConfig = {
 
 const LandingPage = (props) => {
   return (
+    
     <>
            {/* Main Content */}
-      <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+      <ImageBackground
+        source={require('../assets/background.png')}
+        style={styles.image}
       >
-        <Image
-          source={require('../assets/avatar_default.png')}
-          style={{ width: screenHeight/4, height: screenHeight/4, borderRadius: 400 / 2, marginHorizontal: 10}}
-        ></Image>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Image
+              source={require('../assets/avatar_default.png')}
+              style={{ width: screenHeight/4, height: screenHeight/4, borderRadius: 400 / 2, marginHorizontal: 10}}
+            ></Image>
 
-      </View>
+          </View>
+            <View style = {styles.centeredContainer}>
+            <ProgressChart
+              data={data}
+              width={screenWidth}
+              height={screenHeight/2}
+              strokeWidth={10}
+              radius={50}
+              chartConfig={chartConfig}
+              hideLegend={false}
+            />
+            </View >
+            <Text style={StyleSheet.text}>
+              Spicy jalapeno bacon ipsum dolor amet turducken swine turkey, andouille corned beef jerky venison beef ribs jowl ball tip chislic. Drumstick pork loin biltong meatball cupim ribeye. Filet mignon short ribs biltong, t-bone corned beef pork meatloaf ham hock turducken swine sausage cow kevin. Alcatra landjaeger strip steak, sirloin pastrami venison pig pork chop t-bone ball tip kielbasa. Ribeye picanha short loin, buffalo frankfurter alcatra tail sausage shoulder chislic landjaeger swine ham. Brisket pork boudin shank pancetta andouille capicola.
+              Ham hock jerky meatloaf chicken turkey turducken, pancetta biltong beef ribs pork belly hamburger buffalo. Ham prosciutto meatball, hamburger pig fatback picanha cow tail buffalo corned beef. Buffalo filet mignon turkey, landjaeger chuck burgdoggen pork loin short ribs tail spare ribs. Tongue ham sirloin, boudin strip steak sausage flank salami. Corned beef shank alcatra turkey buffalo swine picanha salami.
+              Meatloaf ground round rump hamburger, bresaola ham landjaeger kevin bacon shankle short loin pastrami. Venison alcatra pastrami pig. Leberkas capicola pancetta, flank pork chop tail beef landjaeger. Chicken salami short loin, filet mignon prosciutto alcatra pastrami ball tip corned beef. Picanha pancetta spare ribs, landjaeger tongue pork loin hamburger tenderloin sausage shankle.
+              Pork venison beef ribeye turkey shankle. Drumstick chuck spare ribs ham. Alcatra pancetta tail chislic capicola frankfurter, kielbasa ham. Tongue flank alcatra capicola frankfurter ball tip shank meatloaf. Kevin cow doner pork loin. Buffalo shoulder sirloin picanha. Jerky andouille meatball salami chicken strip steak corned beef kevin pastrami shankle pork belly drumstick.
+              Meatball tail kevin, ground round drumstick kielbasa pig porchetta cow cupim strip steak tongue. Salami biltong beef ribs drumstick. Bresaola pork doner short ribs turducken. Frankfurter pork beef tenderloin meatball, chislic shoulder chuck buffalo picanha short loin brisket salami. Jerky pork chop chislic flank, shoulder bresaola jowl pork belly andouille hamburger tongue shankle brisket ball tip. Jowl boudin tail jerky pork chop, meatloaf chicken landjaeger beef ribeye tri-tip rump ham hock.
+              
+                
+            </Text>
+          </ScrollView>
 
-        <View
-          style={{ width: screenWidth, height: 40, backgroundColor: 'powderblue' }}
-        />
-        <ProgressChart
-          data={data}
-          width={screenWidth}
-          height={screenHeight/2}
-          strokeWidth={10}
-          radius={50}
-          chartConfig={chartConfig}
-          hideLegend={false}
-        />
-        <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
-        />
-        <Text style={StyleSheet.text}>
-          Spicy jalapeno bacon ipsum dolor amet turducken swine turkey, andouille corned beef jerky venison beef ribs jowl ball tip chislic. Drumstick pork loin biltong meatball cupim ribeye. Filet mignon short ribs biltong, t-bone corned beef pork meatloaf ham hock turducken swine sausage cow kevin. Alcatra landjaeger strip steak, sirloin pastrami venison pig pork chop t-bone ball tip kielbasa. Ribeye picanha short loin, buffalo frankfurter alcatra tail sausage shoulder chislic landjaeger swine ham. Brisket pork boudin shank pancetta andouille capicola.
-          Ham hock jerky meatloaf chicken turkey turducken, pancetta biltong beef ribs pork belly hamburger buffalo. Ham prosciutto meatball, hamburger pig fatback picanha cow tail buffalo corned beef. Buffalo filet mignon turkey, landjaeger chuck burgdoggen pork loin short ribs tail spare ribs. Tongue ham sirloin, boudin strip steak sausage flank salami. Corned beef shank alcatra turkey buffalo swine picanha salami.
-          Meatloaf ground round rump hamburger, bresaola ham landjaeger kevin bacon shankle short loin pastrami. Venison alcatra pastrami pig. Leberkas capicola pancetta, flank pork chop tail beef landjaeger. Chicken salami short loin, filet mignon prosciutto alcatra pastrami ball tip corned beef. Picanha pancetta spare ribs, landjaeger tongue pork loin hamburger tenderloin sausage shankle.
-          Pork venison beef ribeye turkey shankle. Drumstick chuck spare ribs ham. Alcatra pancetta tail chislic capicola frankfurter, kielbasa ham. Tongue flank alcatra capicola frankfurter ball tip shank meatloaf. Kevin cow doner pork loin. Buffalo shoulder sirloin picanha. Jerky andouille meatball salami chicken strip steak corned beef kevin pastrami shankle pork belly drumstick.
-          Meatball tail kevin, ground round drumstick kielbasa pig porchetta cow cupim strip steak tongue. Salami biltong beef ribs drumstick. Bresaola pork doner short ribs turducken. Frankfurter pork beef tenderloin meatball, chislic shoulder chuck buffalo picanha short loin brisket salami. Jerky pork chop chislic flank, shoulder bresaola jowl pork belly andouille hamburger tongue shankle brisket ball tip. Jowl boudin tail jerky pork chop, meatloaf chicken landjaeger beef ribeye tri-tip rump ham hock.
-          
-            
-        </Text>
-        </ScrollView>
         </SafeAreaView>
+        </ImageBackground>
 
     </>
   );
@@ -108,12 +116,23 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     //alignItems: 'center',
   },
+  centeredContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
   scrollView: {
     marginHorizontal: 15,
-    backgroundColor: "powderblue"
+    backgroundColor: "transparent",
   },
   text: {
     fontSize: 40,
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
   }
 });
 
