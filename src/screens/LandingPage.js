@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Text,
@@ -16,6 +16,8 @@ import {
 import {
   ProgressChart,
 } from "react-native-chart-kit";
+
+import { UserContext } from "../providers/UserProvider";
 
 // if (firebase.auth().currentUser) {
 //   return "successfully logged in";
@@ -48,6 +50,8 @@ const chartConfig = {
 };
 
 const LandingPage = (props) => {
+  const user = useContext(UserContext); // holds the current user
+     
   return (
     <>
            {/* Main Content */}
