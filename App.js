@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
+
 import SignUpScreen from './src/screens/SignupScreen';
 import Login from './src/screens/Login';
 import HomeScreen from './src/screens/HomeScreen';
 import LandingPage from './src/screens/LandingPage';
 import WishScreen from './src/screens/WishScreen';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
+import UserProvider from "./src/providers/UserProvider";
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -27,6 +29,7 @@ function TabNav() {
 export default function App() {
   
   return (
+    <UserProvider>
     <NavigationContainer>
       <AuthStack.Navigator>        
         <AuthStack.Screen name="Home" component={HomeScreen} options={{title: "Home", headerShown: false}}/>
@@ -35,7 +38,8 @@ export default function App() {
         <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <AuthStack.Screen name="Wishful" component={TabNav} options={{title: "Tab Nav", headerShown: false}} />
       </AuthStack.Navigator>
-    </NavigationContainer> 
+    </NavigationContainer>   
+    </UserProvider>
   );
 }
 
