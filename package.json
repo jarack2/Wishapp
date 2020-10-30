@@ -19,6 +19,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
     "react-native-chart-kit": "^6.6.1",
     "react-native-dotenv": "^2.4.1",
+    "react-native-modals": "^0.19.9",
     "react-native-screens": "~2.10.`",
     "react-native-svg": "^12.1.0",
     "react-native-svg-charts": "5.4.0",
