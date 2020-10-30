@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Text,
@@ -10,19 +10,17 @@ import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
+  FlatList,
 } from 'react-native';
 
 import {
-  LineChart,
-  BarChart,
-  PieChart,
   ProgressChart,
-  ContributionGraph,
-  StackedBarChart
 } from "react-native-chart-kit";
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
+import { UserContext } from "../providers/UserProvider";
+
 // if (firebase.auth().currentUser) {
 //   return "successfully logged in";
 // }
@@ -41,6 +39,8 @@ const data = {
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
+
+
 const chartConfig = {
   backgroundGradientFrom: "#2196F3",
   backgroundGradientFromOpacity: .4,
@@ -56,6 +56,8 @@ const chartConfig = {
 };
 
 const LandingPage = (props) => {
+  const user = useContext(UserContext); // holds the current user
+     
   return (
     
     <>
@@ -102,6 +104,40 @@ const LandingPage = (props) => {
             </Text>
           </ScrollView>
 
+        <View
+          style={{ width: screenWidth, height: 40, backgroundColor: 'powderblue' }}
+        />
+        <ProgressChart
+          data={data}
+          width={screenWidth}
+          height={screenHeight/2}
+          strokeWidth={10}
+          radius={50}
+          chartConfig={chartConfig}
+          hideLegend={false}
+        />
+        <View
+          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
+        />
+         <View style={styles.ListContainer}>
+      <FlatList
+        data={[
+          {key: 'These'},
+          {key: 'wishes'},
+          {key: 'need'},
+          {key: 'to'},
+          {key: 'be'},
+          {key: 'populated'},
+          {key: 'based'},
+          {key: 'on'},
+          {key: 'wish'},
+          {key: 'page'},
+        ]}
+        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+      />
+    </View>
+            
+        
         </SafeAreaView>
         </ImageBackground>
 
@@ -110,6 +146,17 @@ const LandingPage = (props) => {
 };
 
 const styles = StyleSheet.create({
+  ListContainer: {
+    flex: 1,
+    paddingTop: 22,
+    flexDirection: 'column',
+    alignItems: 'center',
+   },
+   item: {
+     padding: 10,
+     fontSize: 18,
+     height: 44,
+   },
   container: {
     flex: 20,
     flexDirection: 'column',
@@ -135,5 +182,5 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   }
 });
-
+// Comment #1
 export default LandingPage;
