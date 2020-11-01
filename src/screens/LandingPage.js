@@ -12,9 +12,6 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Modal,
-  ModalTitle,
-  ModalContent,
 } from 'react-native';
 
 import {
@@ -61,7 +58,6 @@ const chartConfig = {
 const LandingPage = (props) => {
   const user = useContext(UserContext); // holds the current user
      
-  const [bottomModalAndTitle, setBottomModalAndTitle] = useState(false);
 
   return (
     <>
@@ -95,46 +91,20 @@ const LandingPage = (props) => {
           </TouchableOpacity>
 
           <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
-          activeOpacity={0.5}>
+            activeOpacity={0.5}
+            >
             <Image source={require('../assets/avatar_default.png')} style={styles.topBar} />
-            onPress={() => {
-              setBottomModalAndTitle(true);
-            }}
+            
           </TouchableOpacity>
 
-          <Modal.BottomModal
-          visible={bottomModalAndTitle}
-          onTouchOutside={setBottomModalAndTitle(false)}
-          height={0.5}
-          width={1}
-          onSwipeOut={setBottomModalAndTitle(false)}
-          modalTitle={
-            <ModalTitle
-              title="Bottom Modal"
-              hasTitleBar
-            />
-          }
-        >
-          <ModalContent
-            style={{
-              flex: 1,
-              backgroundColor: 'fff',
-            }}
-          >
-            <Text>
-              Bottom Modal with Title
-            </Text>
-          </ModalContent>
-        </Modal.BottomModal>
-          
-        
       </View>
 </View>
            {/* Main Content */}
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
       
-        
+      
+          
       <View
         style={{
           flex: 1,
@@ -219,7 +189,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 10,
    
-  }
+  },
+
 });
 // Comment #1
 export default LandingPage;
