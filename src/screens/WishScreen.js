@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import {
   Button,
   Text,
@@ -10,8 +10,14 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
+import { WebView } from 'react-native-webview';
+import SearchComponent from "react-native-search-component";
+//npm install --save react-native-webview or yarn add react-native-webview also same for react-native-svg
 
 const WishScreen = (props) => {
+  const [theme, setTheme] = React.useState("LIGHT");
+  const [searchTerm, setSearchTerm] = useState("");
+  const onSearchClear = () => setSearchTerm("");
   return (
     <>
       <View
@@ -41,6 +47,20 @@ const WishScreen = (props) => {
         <View
           style={{ width: 40, height: 40, backgroundColor: 'black' }}
         />
+         <SearchComponent
+        value={searchTerm}
+        theme={theme}
+        onSearchClear={onSearchClear}
+      />
+      <Text
+        style={[
+          themeBasedTextStyle,
+          { textAlign: "left", paddingLeft: 16, fontSize: 18 },
+        ]}
+      >
+        {" "}
+        Search Term : {searchTerm}
+      </Text>
         <Text style={StyleSheet.text}>
           Spicy jalapeno bacon ipsum dolor amet turducken swine turkey, andouille corned beef jerky venison beef ribs jowl ball tip chislic. Drumstick pork loin biltong meatball cupim ribeye. Filet mignon short ribs biltong, t-bone corned beef pork meatloaf ham hock turducken swine sausage cow kevin. Alcatra landjaeger strip steak, sirloin pastrami venison pig pork chop t-bone ball tip kielbasa. Ribeye picanha short loin, buffalo frankfurter alcatra tail sausage shoulder chislic landjaeger swine ham. Brisket pork boudin shank pancetta andouille capicola.
           Ham hock jerky meatloaf chicken turkey turducken, pancetta biltong beef ribs pork belly hamburger buffalo. Ham prosciutto meatball, hamburger pig fatback picanha cow tail buffalo corned beef. Buffalo filet mignon turkey, landjaeger chuck burgdoggen pork loin short ribs tail spare ribs. Tongue ham sirloin, boudin strip steak sausage flank salami. Corned beef shank alcatra turkey buffalo swine picanha salami.
