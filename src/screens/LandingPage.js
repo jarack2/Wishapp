@@ -11,11 +11,17 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
   ProgressChart,
 } from "react-native-chart-kit";
+import { ScreenStackHeaderRightView } from 'react-native-screens';
+
+
+
+
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -68,9 +74,50 @@ const LandingPage = (props) => {
   // });
   return (
     <>
+      
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+        }}
+      >
+        <View
+        style={{
+          flex: 2,
+            flexDirection: 'row',
+          backgroundColor: 'powderblue',
+        }}
+        >
+          
+      </View>
+        <View
+        style={{
+          flex: 4,
+            flexDirection: 'row-reverse',
+          backgroundColor: 'steelblue',
+        }}
+      >
+        
+        <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
+          activeOpacity={0.5}>
+          <Image source={require('../assets/plus.png')} style={styles.topBar} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
+            activeOpacity={0.5}
+            >
+            <Image source={require('../assets/avatar_default.png')} style={styles.topBar} />
+            
+          </TouchableOpacity>
+
+      </View>
+</View>
            {/* Main Content */}
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
+      
+      
+          
       <View
         style={{
           flex: 1,
@@ -78,14 +125,7 @@ const LandingPage = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-      >
-        <Image
-          source={require('../assets/avatar_default.png')}
-          style={{ width: screenHeight/4, height: screenHeight/4, borderRadius: 400 / 2, marginHorizontal: 10}}
-        ></Image>
-
-      </View>
-
+          >
         <View
           style={{ width: screenWidth, height: 40, backgroundColor: 'powderblue' }}
         />
@@ -100,7 +140,8 @@ const LandingPage = (props) => {
         />
         <View
           style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
-        />
+            />
+            
          <View style={styles.ListContainer}>
       <FlatList
         data={[
@@ -118,7 +159,7 @@ const LandingPage = (props) => {
         renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
       />
     </View>
-            
+    </View>
         </ScrollView>
         </SafeAreaView>
 
@@ -161,7 +202,19 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'cover',
-  }
+  },
+  topBar: {
+    flexDirection: 'row-reverse',
+    flex: 1,
+    resizeMode: 'stretch',
+    width: 25,
+    height: 25,
+    borderRadius: 400 / 2,
+    marginHorizontal: 10,
+    padding: 10,
+   
+  },
+
 });
 // Comment #1
 export default LandingPage;
