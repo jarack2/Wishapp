@@ -192,5 +192,5 @@ const styles = StyleSheet.create({
   },
 
 });
-// Comment #1
+// Comment #2
 export default LandingPage;
