@@ -55,17 +55,25 @@ const chartConfig = {
   },
 };
 
-
-
 const LandingPage = (props) => {
-  const user = useContext(UserContext); // holds the current user
-  //var wishes = ["These are placeholder wishes", "used to test the functionality", "of the firestore backend"];  
+
+  const user = useContext(UserContext); // holds the current user  
+  let wishes = [];  
+
+  useEffect(()  => {
+  firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
+  .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+          console.log(doc.id, " => ", doc.data().title);
+          wishes.push({key: doc.data().title.text});
+          console.log(wishes);
+          });
+  });
+});
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
   });
-  // firebase.db.collection('wishes').doc(user.uid).set({
-  //   wishList: wishes,
-  // });
+
   return (
     <>
            {/* Main Content */}
@@ -85,10 +93,6 @@ const LandingPage = (props) => {
         ></Image>
 
       </View>
-
-        <View
-          style={{ width: screenWidth, height: 40, backgroundColor: 'powderblue' }}
-        />
         <ProgressChart
           data={data}
           width={screenWidth}
@@ -98,26 +102,12 @@ const LandingPage = (props) => {
           chartConfig={chartConfig}
           hideLegend={false}
         />
-        <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
-        />
-         <View style={styles.ListContainer}>
-      <FlatList
-        data={[
-          {key: 'These'},
-          {key: 'wishes'},
-          {key: 'need'},
-          {key: 'to'},
-          {key: 'be'},
-          {key: 'populated'},
-          {key: 'based'},
-          {key: 'on'},
-          {key: 'wish'},
-          {key: 'page'},
-        ]}
-        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-      />
-    </View>
+        <View style={styles.container}>
+          <FlatList
+            data={wishes}
+            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+          />
+        </View>
             
         </ScrollView>
         </SafeAreaView>
