@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Text,
-  TextInput,
   View,
   ImageBackground,
   Image,
@@ -12,6 +11,10 @@ import {
   FlatList,
   TouchableHighlight,
 } from 'react-native';
+
+import {
+  TextInput
+} from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
