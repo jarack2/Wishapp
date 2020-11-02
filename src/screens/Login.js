@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
+  ActivityIndicator,
   ImageBackground,
   StyleSheet, 
   Text,
@@ -16,30 +17,19 @@ import {
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 
-const getUserData = (email, password) => {
+const getUserData = (email, password) => {  
   firebase.auth().signInWithEmailAndPassword(email, password)
   .catch((error) => {
     alert("There was an error: " + error.message);
     console.log(error.code + ": " + error.message);
   });
-  
-  if (firebase.auth().currentUser) return true;
-  else return false;
 }
 
 const Login = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, seterrorMessage] = useState();
-
-  useEffect(() => {
-    if (firebase.auth().currentUser) {
-      firebase.auth().signOut().catch((error) => {
-        alert("There was an error: " + error.message);
-        console.log(error.code + ": " + error.message);
-      });
-    }
-  });
+  const [spinner, setSpinner] = useState(false);
   
   return (
     <View style={styles.container}>
@@ -59,6 +49,7 @@ const Login = (props) => {
             justifyContent: 'flex-end',
           }}
         >
+           {spinner ? <ActivityIndicator size="large" color="#00ff00" style={styles.spinner}/> : undefined}
         <TextInput
          placeholder="Email"
          placeholderTextColor="#838383"
@@ -80,16 +71,23 @@ const Login = (props) => {
             overlayColor="#FFFFFF"
             style={styles.buttons}
             onPress={() => {
-              if (getUserData(email, password)) {
-                props.navigation.navigate('Wishful');            
-              }
-              else {
-                seterrorMessage("There was an error logging in. Please try again.");
-              }
+              getUserData(email, password);
+              setSpinner(true);
+              firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                  props.navigation.navigate('Wishful');
+                } else {
+                  seterrorMessage("An error has occurred. Please try again.");
+                  // setSpinner(false);
+                }
+              });         
             }} 
           >
             <Text style={styles.buttonLabels}>Login</Text>
           </TouchableHighlight>
+          {/* <TouchableHighlight onPress={() => firebase.auth().signOut()}>
+          <Text style={styles.buttonLabels}>Logout</Text> 
+          </TouchableHighlight> */}
         </View>
       </ImageBackground>
     </View>
