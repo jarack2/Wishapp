@@ -23,6 +23,8 @@ import { ScreenStackHeaderRightView } from 'react-native-screens';
 
 
 
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
 import { UserContext } from "../providers/UserProvider";
 
 // if (firebase.auth().currentUser) {
@@ -31,8 +33,12 @@ import { UserContext } from "../providers/UserProvider";
 // const [message, setMessage] = useState();
 // {message ? <Text style={styles.buttonLabels}>{message}</Text> : null}
 
+
+const uid = firebase.auth().currentUser;
+console.log(uid);
+
 const data = {
-  labels: ["Wish Completion"], // optional
+  labels: ["wishes"], // optional
   data: [0.4]
 };
 
@@ -43,9 +49,9 @@ const screenHeight = Dimensions.get("window").height;
 
 const chartConfig = {
   backgroundGradientFrom: "#2196F3",
-  backgroundGradientFromOpacity: 1,
+  backgroundGradientFromOpacity: .4,
   backgroundGradientTo: "#2196F3",
-  backgroundGradientToOpacity: 1,
+  backgroundGradientToOpacity: .4,
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -56,8 +62,25 @@ const chartConfig = {
 };
 
 const LandingPage = (props) => {
-  const user = useContext(UserContext); // holds the current user
-     
+
+
+  const user = useContext(UserContext); // holds the current user  
+  let wishes = [];  
+
+  useEffect(()  => {
+  firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
+  .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+          console.log(doc.id, " => ", doc.data().title);
+          wishes.push({key: doc.data().title.text});
+          console.log(wishes);
+          });
+  });
+});
+  firebase.db.collection('users').doc(user.uid).set({
+    username: user.email,
+  });
+
 
   return (
     <>
@@ -112,10 +135,15 @@ const LandingPage = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-          >
-        <View
-          style={{ width: screenWidth, height: 40, backgroundColor: 'powderblue' }}
-        />
+
+      >
+        <Image
+          source={require('../assets/avatar_default.png')}
+          style={{ width: screenHeight/4, height: screenHeight/4, borderRadius: 400 / 2, marginHorizontal: 10}}
+        ></Image>
+
+      </View>
+
         <ProgressChart
           data={data}
           width={screenWidth}
@@ -125,28 +153,13 @@ const LandingPage = (props) => {
           chartConfig={chartConfig}
           hideLegend={false}
         />
-        <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
-            />
+        <View style={styles.container}>
+          <FlatList
+            data={wishes}
+            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+          />
+        </View>
             
-         <View style={styles.ListContainer}>
-      <FlatList
-        data={[
-          {key: 'These'},
-          {key: 'wishes'},
-          {key: 'need'},
-          {key: 'to'},
-          {key: 'be'},
-          {key: 'populated'},
-          {key: 'based'},
-          {key: 'on'},
-          {key: 'wish'},
-          {key: 'page'},
-        ]}
-        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-      />
-    </View>
-    </View>
         </ScrollView>
         </SafeAreaView>
 
@@ -172,13 +185,26 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     //alignItems: 'center',
   },
+  centeredContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
   scrollView: {
     marginHorizontal: 15,
-    backgroundColor: "powderblue"
+    backgroundColor: "transparent",
   },
   text: {
     fontSize: 40,
   },
+
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+
   topBar: {
     flexDirection: 'row-reverse',
     flex: 1,
