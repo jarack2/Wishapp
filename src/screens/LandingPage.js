@@ -12,6 +12,11 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+<<<<<<< Updated upstream
+=======
+  Modal,
+  TouchableHighlight,
+>>>>>>> Stashed changes
 } from 'react-native';
 
 import {
@@ -87,7 +92,7 @@ const LandingPage = (props) => {
         
         <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
           activeOpacity={0.5}>
-          <Image source={require('../assets/plus.png')} style={styles.topBar} />
+          <Image source={require('../assets/avatar_default.png')} style={styles.topBar} />
           </TouchableOpacity>
 
           <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
