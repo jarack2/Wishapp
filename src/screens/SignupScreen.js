@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, ImageBackground, StyleSheet, TouchableHighlight } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator, ImageBackground, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { TextInput, BackButton } from '../components';
 
 import firebase from '../../firebaseConfig';
@@ -11,24 +11,13 @@ const createUser = (email, password) => {
     alert("There was an error: " + error.message);
     console.log(error.code + ": " + error.message);
   });
-  
-  if (firebase.auth().currentUser) return true;
-  else return false;
 }
 
 const SignupScreen = (props) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorMessage, seterrorMessage] = useState();
-  
-  useEffect(() => {
-    if (firebase.auth().currentUser) {
-      firebase.auth().signOut().catch((error) => {
-        alert("There was an error: " + error.message);
-        console.log(error.code + ": " + error.message);
-      });
-    }
-  });
+  const [spinner, setSpinner] = useState(false);
   
   return (
     <>
@@ -39,7 +28,7 @@ const SignupScreen = (props) => {
         <BackButton 
           onPress={() => props.navigation.navigate('Home')}
        />
-        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+        {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : undefined}
         <Text style={styles.title}>WishApp</Text>
         <View
           style={{
@@ -48,6 +37,7 @@ const SignupScreen = (props) => {
             justifyContent: 'flex-end',
           }}
         >
+          {spinner ? <ActivityIndicator size="large" color="#00ff00" style={styles.spinner}/> : undefined}
            <TextInput
             placeholder="Email"
             placeholderTextColor="#838383"
@@ -63,12 +53,17 @@ const SignupScreen = (props) => {
             style={styles.buttons}
             color="#2196F3"
             onPress={() => {
-              if (createUser(email, password)) {
-                props.navigation.navigate('Wishful');            
-              }
-              else {
-                seterrorMessage("There was an error creating your account. Please try again.");
-              }
+              createUser(email, password);
+              setSpinner(true);
+              
+              firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                  props.navigation.navigate('Wishful');
+                } else {
+                  seterrorMessage("There was an error creating your account. Please try again.");
+                  // setSpinner(false);
+                }
+              });         
             }} 
           >
             <Text style={styles.buttonLabels}>Sign Up</Text>
@@ -114,6 +109,13 @@ const styles = StyleSheet.create({
     fontWeight: 100,
     textAlign: 'center',
     fontSize: 24,
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
   },
 });
 
