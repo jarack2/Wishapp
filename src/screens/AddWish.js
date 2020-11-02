@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   }
-});
+});//random
 
 export default AddWish;
