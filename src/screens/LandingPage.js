@@ -63,6 +63,7 @@ const chartConfig = {
 
 const LandingPage = (props) => {
 
+
   const user = useContext(UserContext); // holds the current user  
   let wishes = [];  
 
@@ -79,6 +80,7 @@ const LandingPage = (props) => {
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
   });
+
 
   return (
     <>
@@ -133,6 +135,7 @@ const LandingPage = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
+
       >
         <Image
           source={require('../assets/avatar_default.png')}
@@ -140,6 +143,7 @@ const LandingPage = (props) => {
         ></Image>
 
       </View>
+
         <ProgressChart
           data={data}
           width={screenWidth}
@@ -195,10 +199,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 40,
   },
+
   image: {
     flex: 1,
     resizeMode: 'cover',
   },
+
   topBar: {
     flexDirection: 'row-reverse',
     flex: 1,
@@ -212,5 +218,5 @@ const styles = StyleSheet.create({
   },
 
 });
-// Comment #1
+// Comment #2
 export default LandingPage;
