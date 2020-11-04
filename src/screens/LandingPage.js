@@ -62,21 +62,20 @@ const chartConfig = {
 };
 
 const LandingPage = (props) => {
-
+  const [wishList, setWishList] = useState();
 
   const user = useContext(UserContext); // holds the current user  
   let wishes = [];  
 
-  useEffect(()  => {
-  firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
-  .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-          console.log(doc.id, " => ", doc.data().title);
-          wishes.push({key: doc.data().title.text});
-          console.log(wishes);
-          });
-  });
+  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+    snapshot.docs.forEach(doc => {
+         let wishDoc = doc.data();
+         wishes.push({key: wishDoc.title + " ", msg: wishDoc.wish + " "});
+     });
+    setWishList(wishes);
 });
+  //let data = await firebase.firestore().collection("wishes").doc(user.uid).collection("wishList").get();
+  //console.log(data);
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
   });
@@ -155,7 +154,7 @@ const LandingPage = (props) => {
         />
         <View style={styles.container}>
           <FlatList
-            data={wishes}
+            data={wishList}
             renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
           />
         </View>
