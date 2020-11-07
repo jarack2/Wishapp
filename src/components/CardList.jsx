@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 24,
+    textAlign: 'center',
   },
 });
 export default CardList;
