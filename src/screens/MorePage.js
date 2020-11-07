@@ -8,17 +8,20 @@ import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
 
 const log = () => console.log('this menu is poopy');
-const signout = () => {
+
+const signOut = (props) => {
   firebase.auth().signOut();
+  // props.navigation.navigate('home');
 };
 
 const options = [
   {
     name: 'Sign Out',
-    icon: 'account-circle',
-    iconType: 'font-awesome5',
-    iconColor: 'red',
-    action: () => log(),
+    icon: 'unlock',
+    iconType: 'evilicon',
+    iconColor: 'white',
+    iconSize: 32,
+    action: () => signOut(),
   },
   {
     name: 'Your Account',
