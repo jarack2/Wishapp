@@ -1,45 +1,55 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 
 const CardList = ({ cards }) => {
   return (
     <>
       {cards.map((card) => (
-        <Card containerStyle={styles.card} key={card.name}>
-          <Card.Title style={styles.title}>
-            <Icon
-              name={card.icon}
-              size={24}
-              type={card.type ? card.type : undefined}
-              style={styles.icon}
-            />
-            {card.name}
-          </Card.Title>
+        <Card containerStyle={cardStyles} key={card.name}>
+          <TouchableWithoutFeedback
+            key={card.name}
+            onPress={() => (card.action ? card.action() : undefined)}
+          >
+            <Card.FeaturedTitle style={styles.title}>
+              {card.icon ? (
+                <Icon
+                  name={card.icon}
+                  color={card.iconColor ? card.iconColor : 'white'}
+                  size={card.iconSize ? card.iconSize : 32}
+                  style={styles.icon}
+                  type={card.iconType}
+                />
+              ) : undefined}
+              {card.name}
+            </Card.FeaturedTitle>
+          </TouchableWithoutFeedback>
         </Card>
       ))}
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  card: {
-    borderColor: 'transparent',
-    borderRadius: 6,
-    backgroundColor: 'purple',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
-    elevation: 18,
-    opacity: 0.85,
-    cursor: 'pointer',
+const cardStyles = {
+  borderColor: 'transparent',
+  borderRadius: 6,
+  backgroundColor: 'purple',
+  shadowColor: '#000000',
+  shadowOffset: {
+    width: 0,
+    height: 6,
   },
+  shadowOpacity: 0.37,
+  shadowRadius: 7.49,
+  elevation: 18,
+  opacity: 0.85,
+};
+
+const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 32,
+    marginTop: 12,
+    fontSize: 48,
   },
   title: {
     color: 'white',
