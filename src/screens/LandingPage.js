@@ -67,10 +67,10 @@ const LandingPage = (props) => {
   const user = useContext(UserContext); // holds the current user  
   let wishes = [];  
 
-  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
          let wishDoc = doc.data();
-         wishes.push({key: wishDoc.title + " ", msg: wishDoc.wish + " "});
+         wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });        
      });
     setWishList(wishes);
 });

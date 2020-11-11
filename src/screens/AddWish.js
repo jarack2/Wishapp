@@ -20,18 +20,21 @@ import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from "../providers/UserProvider";
 
-const confirmWishHandler = (title, descript, user) => {
-    var title2 = title.toString();
-    firebase.db.collection('wishes').doc(user.uid).collection('wishList').doc().set({        
-      title: title,  
-      wish: descript
-    });
-  }
+
 
 const AddWish = (props) => {
     const [title, setTitle] = useState();
     const [descript, setDescript] = useState();
     const user = useContext(UserContext); // holds the current user 
+
+    const confirmWishHandler = (title, descript, user) => {
+      var title2 = title.toString();
+      firebase.db.collection('wishes').doc(user.uid).collection('wishList').doc().set({        
+        title: title,  
+        wish: descript
+      });
+      props.navigation.navigate('WishScreen');
+    }
 
     return (
     <>

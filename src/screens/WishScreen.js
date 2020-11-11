@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Text,
@@ -12,11 +12,23 @@ import {
   FlatList,
   TouchableHighlight,
 } from 'react-native';
-
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
+import { UserContext } from "../providers/UserProvider";
 
 
 
 const WishScreen = (props) => {
+  const [wishList, setWishList] = useState();
+  const user = useContext(UserContext); // holds the current user  
+  let wishes = [];  
+  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+    snapshot.docs.forEach(doc => {
+         let wishDoc = doc.data();
+         wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });        
+     });
+    setWishList(wishes);
+});
   return (
     <>
       <View
@@ -39,18 +51,7 @@ const WishScreen = (props) => {
         <ScrollView style={styles.scrollView}>
           <View style={styles.ListContainer}>
             <FlatList
-              data={[
-                {key: 'These'},
-                {key: 'wishes'},
-                {key: 'need'},
-                {key: 'to'},
-                {key: 'be'},
-                {key: 'populated'},
-                {key: 'based'},
-                {key: 'on'},
-                {key: 'wish'},
-                {key: 'page'},
-              ]}
+              data={wishList}
               renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
             />
           </View>
