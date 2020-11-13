@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, TouchableHighlight } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 
 const CardList = ({ cards }) => {
@@ -7,9 +7,10 @@ const CardList = ({ cards }) => {
     <>
       {cards.map((card) => (
         <Card containerStyle={cardStyles} key={card.name}>
-          <TouchableWithoutFeedback
+          <TouchableHighlight
             key={card.name}
             onPress={() => (card.action ? card.action() : undefined)}
+            underlayColor="#8B008B"
           >
             <Card.FeaturedTitle style={styles.title}>
               {card.icon ? (
@@ -23,7 +24,7 @@ const CardList = ({ cards }) => {
               ) : undefined}
               {card.name}
             </Card.FeaturedTitle>
-          </TouchableWithoutFeedback>
+          </TouchableHighlight>
         </Card>
       ))}
     </>
