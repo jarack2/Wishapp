@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   }

@@ -68,18 +68,18 @@ const LandingPage = (props) => {
   let wishes = [];  
 
   useEffect(()  => {
-  firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
-  .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-          console.log(doc.id, " => ", doc.data().title);
-          wishes.push({key: doc.data().title.text});
-          console.log(wishes);
-          });
-  });
+  // firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
+  // .then(querySnapshot => {
+  //         querySnapshot.forEach(doc => {
+  //         console.log(doc.id, " => ", doc.data().title);
+  //         wishes.push({key: doc.data().title.text});
+  //         console.log(wishes);
+  //         });
+  // });
 });
-  firebase.db.collection('users').doc(user.uid).set({
-    username: user.email,
-  });
+  // firebase.db.collection('users').doc(user.uid).set({
+  //   username: user.email,
+  // });
 
 
   return (
