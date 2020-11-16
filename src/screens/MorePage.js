@@ -13,7 +13,6 @@ const signOut = (props) => {
   firebase.auth().signOut();
   // props.navigation.navigate('home');
 };
-
 const options = [
   {
     name: 'Sign Out',
@@ -21,6 +20,7 @@ const options = [
     iconType: 'evilicon',
     iconColor: 'white',
     iconSize: 32,
+
     action: () => signOut(),
   },
   {
