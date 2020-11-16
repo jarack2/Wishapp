@@ -89,7 +89,7 @@ const AddWish = (props) => {
 
     </>
   );
-};
+};//comment
 
 const styles = StyleSheet.create({
   ListContainer: {
