@@ -96,7 +96,7 @@ const AddWish = (props) => {
       </ImageBackground>
     </>
   );
-};
+};//comment
 
 const styles = StyleSheet.create({
   ListContainer: {

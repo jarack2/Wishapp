@@ -66,6 +66,7 @@ const LandingPage = (props) => {
 
   const user = useContext(UserContext); // holds the current user  
 
+
   let wishes =  [{
     name: 'To have a million dollers!',
     icon: 'bell',
@@ -100,7 +101,8 @@ const LandingPage = (props) => {
     username: user.email,
   });
   
-});
+
+
 
   return (
     <>           
