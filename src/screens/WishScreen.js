@@ -41,7 +41,8 @@ const WishScreen = (props) => {
     iconSize: 32    
   },];  
 
-//   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
+
+  //   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
 //   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
 //     snapshot.docs.forEach(doc => {
 //          let wishDoc = doc.data();
@@ -50,6 +51,9 @@ const WishScreen = (props) => {
 //      });
 //     setWishList(wishes);
 // });
+
+
+
   return (
     <>
     <ImageBackground
