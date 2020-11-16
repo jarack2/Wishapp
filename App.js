@@ -10,6 +10,8 @@ import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen';
 import UserProvider from "./src/providers/UserProvider";
 import AddWish from "./src/screens/AddWish";
 import settings from "./src/screens/settings";
+import MorePage from "./src/screens/MorePage";
+
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,6 +28,7 @@ function TabNav() {
         <Tab.Screen name="WishScreen" component={WishScreen} options={{tabBarLabel: 'Wishes'}}/>
         <Tab.Screen name="AddWish" component={AddWish} options={{tabBarLabel: 'Add Wish'}}/>
         <Tab.Screen name="settings" component={settings} options={{tabBarLabel: 'settings'}}/>
+        <Tab.Screen name="More" component={MorePage} options={{tabBarLabel: 'More'}}/>
       </Tab.Navigator>
   );
 }

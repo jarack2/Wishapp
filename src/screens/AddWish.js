@@ -20,22 +20,29 @@ import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from "../providers/UserProvider";
 
-const confirmWishHandler = (title, descript, user) => {
-    var title2 = title.toString();
-    firebase.db.collection('wishes').doc(user.uid).collection('wishList').doc().set({        
-      title: title,  
-      wish: descript
-    });
-  }
+
 
 const AddWish = (props) => {
     const [title, setTitle] = useState();
     const [descript, setDescript] = useState();
     const user = useContext(UserContext); // holds the current user 
 
+    const confirmWishHandler = (title, descript, user) => {
+      var title2 = title.toString();
+      firebase.db.collection('wishes').doc(user.uid).collection('wishList').doc().set({        
+        title: title,  
+        wish: descript
+      });
+      props.navigation.navigate('WishScreen');
+    }
+
     return (
     <>
       {/* Main Content */}
+    <ImageBackground
+      source={require('../assets/background.png')}
+      style={styles.image}
+    >
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
             <TextInput
@@ -57,7 +64,7 @@ const AddWish = (props) => {
           </TouchableHighlight>
         </ScrollView>
         </SafeAreaView>
-
+      </ImageBackground>
     </>
   );
 };
@@ -69,6 +76,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
    },
+   image: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
    item: {
      padding: 10,
      fontSize: 18,
@@ -81,8 +92,7 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
   },
   scrollView: {
-    marginHorizontal: 15,
-    backgroundColor: "powderblue"
+    marginHorizontal: 15,  
   },
   text: {
     fontSize: 40,
