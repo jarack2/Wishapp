@@ -13,14 +13,14 @@ const signOut = (props) => {
   firebase.auth().signOut();
   // props.navigation.navigate('home');
 };
-//more page
 const options = [
   {
     name: 'Sign Out',
     icon: 'unlock',
     iconType: 'evilicon',
     iconColor: 'white',
-    iconSize: 30,
+    iconSize: 32,
+
     action: () => signOut(),
   },
   {
@@ -61,7 +61,6 @@ const MorePage = () => {
       source={require('../assets/background.png')}
       style={styles.image}
     >
-      <Text>More page</Text>
       <CardList cards={options} />
     </ImageBackground>
   );

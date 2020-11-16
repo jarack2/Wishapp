@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Button,
   Text,
@@ -12,62 +12,66 @@ import {
   FlatList,
   TouchableHighlight,
 } from 'react-native';
-
+import firebase from '../../firebaseConfig';
+import 'firebase/firestore';
+import { UserContext } from "../providers/UserProvider";
+import { CardList } from '../components';
 
 
 
 const WishScreen = (props) => {
+  const [wishList, setWishList] = useState();
+  const user = useContext(UserContext); // holds the current user  
+  let wishes =  [{
+    name: 'To have a million dollers!',
+    icon: 'bell',
+    iconColor: 'white',
+    iconSize: 32    
+  },
+  {
+    name: 'To Run a marathon!',
+    icon: 'bell',
+    iconColor: 'white',
+    iconSize: 32    
+  },
+  {
+    name: 'To graduate!',
+    icon: 'bell',
+    iconColor: 'white',
+    iconSize: 32    
+  },];  
+
+
+  //   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
+//   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+//     snapshot.docs.forEach(doc => {
+//          let wishDoc = doc.data();
+//          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
+//          console.log("Firebas.db.collection line 25");
+//      });
+//     setWishList(wishes);
+// });
+
+
+
   return (
     <>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row-reverse',
-        }}
-      >
-        <ImageBackground
-          source={require('../assets/avatar_default.png')}
-          style={{ width: 40, height: 40, borderRadius: 400 / 2 }}
-        ></ImageBackground>
-        <View
-          style={{ width: 40, height: 40, backgroundColor: 'powderblue' }}
-        />
-      </View>
-
+    <ImageBackground
+      source={require('../assets/background.png')}
+      style={styles.image}
+    >
       {/* Main Content */}
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.ListContainer}>
-            <FlatList
-              data={[
-                {key: 'These'},
-                {key: 'wishes'},
-                {key: 'need'},
-                {key: 'to'},
-                {key: 'be'},
-                {key: 'populated'},
-                {key: 'based'},
-                {key: 'on'},
-                {key: 'wish'},
-                {key: 'page'},
-              ]}
-              renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-            />
+          <CardList cards={wishes} />
           </View>
-          <TouchableHighlight
-            overlayColor="#FFFFFF"
-            style={styles.buttons}
-            onPress={() => props.navigation.navigate('AddWish')}
-          >
-            <Text style={styles.buttonLabels}>Add a Wish!</Text>
-          </TouchableHighlight>
         </ScrollView>
         </SafeAreaView>
-
+    </ImageBackground>
     </>
   );
 };
-
 const styles = StyleSheet.create({
   ListContainer: {
     flex: 1,
@@ -75,6 +79,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
    },
+   image: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
    item: {
      padding: 10,
      fontSize: 18,
@@ -87,8 +95,7 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
   },
   scrollView: {
-    marginHorizontal: 15,
-    backgroundColor: "powderblue"
+    marginHorizontal: 15,    
   },
   text: {
     fontSize: 40,
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   }
