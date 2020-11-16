@@ -39,6 +39,10 @@ const AddWish = (props) => {
     return (
     <>
       {/* Main Content */}
+    <ImageBackground
+      source={require('../assets/background.png')}
+      style={styles.image}
+    >
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
             <TextInput
@@ -60,7 +64,7 @@ const AddWish = (props) => {
           </TouchableHighlight>
         </ScrollView>
         </SafeAreaView>
-
+      </ImageBackground>
     </>
   );
 };
@@ -72,6 +76,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
    },
+   image: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
    item: {
      padding: 10,
      fontSize: 18,
@@ -84,8 +92,7 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
   },
   scrollView: {
-    marginHorizontal: 15,
-    backgroundColor: "powderblue"
+    marginHorizontal: 15,  
   },
   text: {
     fontSize: 40,

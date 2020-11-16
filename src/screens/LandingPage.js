@@ -13,7 +13,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-
+import { CardList } from '../components';
 import {
   ProgressChart,
 } from "react-native-chart-kit";
@@ -65,15 +65,32 @@ const LandingPage = (props) => {
   const [wishList, setWishList] = useState();
 
   const user = useContext(UserContext); // holds the current user  
-  let wishes = [];  
-
-firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
-    snapshot.docs.forEach(doc => {
-         let wishDoc = doc.data();
-         wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });        
-     });
-    setWishList(wishes);
-});
+  let wishes =  [{
+    name: 'To have a million dollers!',
+    icon: 'bell',
+    iconColor: 'white',
+    iconSize: 32    
+  },
+  {
+    name: 'To Run a marathon!',
+    icon: 'bell',
+    iconColor: 'white',
+    iconSize: 32    
+  },
+  {
+    name: 'To graduate!',
+    icon: 'bell',
+    iconColor: 'white',
+    iconSize: 32    
+  },];  
+//THIS CODE IS CAUSING THE DATABASE TO BE PINGED TO MUCH. DO NOT UNCOMMENT UNLESS DEBUGGING
+// firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+//     snapshot.docs.forEach(doc => {
+//          let wishDoc = doc.data();
+//          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });        
+//      });
+//     setWishList(wishes);
+// });
   //let data = await firebase.firestore().collection("wishes").doc(user.uid).collection("wishList").get();
   //console.log(data);
   firebase.db.collection('users').doc(user.uid).set({
@@ -82,46 +99,12 @@ firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then
 
 
   return (
-    <>
-      
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-        }}
-      >
-        <View
-        style={{
-          flex: 2,
-            flexDirection: 'row',
-          backgroundColor: 'powderblue',
-        }}
-        >
-          
-      </View>
-        <View
-        style={{
-          flex: 4,
-            flexDirection: 'row-reverse',
-          backgroundColor: 'steelblue',
-        }}
-      >
-        
-        <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
-          activeOpacity={0.5}>
-          <Image source={require('../assets/plus.png')} style={styles.topBar} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center', padding: 20 }}
-            activeOpacity={0.5}
-            >
-            <Image source={require('../assets/avatar_default.png')} style={styles.topBar} />
-            
-          </TouchableOpacity>
-
-      </View>
-</View>
+    <>           
            {/* Main Content */}
+     <ImageBackground
+      source={require('../assets/background.png')}
+      style={styles.image}
+    >
       <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
       
@@ -153,15 +136,12 @@ firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then
           hideLegend={false}
         />
         <View style={styles.container}>
-          <FlatList
-            data={wishList}
-            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-          />
+          <CardList cards={wishes} />
         </View>
             
         </ScrollView>
         </SafeAreaView>
-
+      </ImageBackground>
     </>
   );
 };
