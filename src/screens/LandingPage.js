@@ -66,6 +66,7 @@ const LandingPage = (props) => {
 
   const user = useContext(UserContext); // holds the current user  
 
+
   let wishes =  [{
     name: 'To have a million dollers!',
     icon: 'bell',
@@ -98,6 +99,7 @@ const LandingPage = (props) => {
     username: user.email,
   });
   
+
   useEffect(()  => {
   // firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
   // .then(querySnapshot => {
@@ -111,6 +113,7 @@ const LandingPage = (props) => {
   // firebase.db.collection('users').doc(user.uid).set({
   //   username: user.email,
   // });
+
 
   return (
     <>           
