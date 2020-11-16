@@ -85,6 +85,7 @@ const LandingPage = (props) => {
     iconColor: 'white',
     iconSize: 32    
   },];  
+
 //THIS CODE IS CAUSING THE DATABASE TO BE PINGED TO MUCH. DO NOT UNCOMMENT UNLESS DEBUGGING
 // firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
 //     snapshot.docs.forEach(doc => {
@@ -95,24 +96,12 @@ const LandingPage = (props) => {
 // });
   //let data = await firebase.firestore().collection("wishes").doc(user.uid).collection("wishList").get();
   //console.log(data);
+  
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
   });
   
 
-  useEffect(()  => {
-  // firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
-  // .then(querySnapshot => {
-  //         querySnapshot.forEach(doc => {
-  //         console.log(doc.id, " => ", doc.data().title);
-  //         wishes.push({key: doc.data().title.text});
-  //         console.log(wishes);
-  //         });
-  // });
-});
-  // firebase.db.collection('users').doc(user.uid).set({
-  //   username: user.email,
-  // });
 
 
   return (
