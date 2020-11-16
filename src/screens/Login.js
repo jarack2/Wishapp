@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   title: {
-    fontSize: '48px',
+    fontSize: 48,
     color: 'white',
     textAlign: 'center', 
-    marginVertical: '80px',
+    marginVertical: 80,
     borderColor: 'red'
   },
   label: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   },
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   error: {
     color: 'white',
     backgroundColor: 'red',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   },

@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
     width: '80%',
     marginVertical: 25,
     marginHorizontal: '10%',
-    fontSize: '50px',
+    fontSize: 50,
     fontWeight: '100',
     borderStyle: 'solid',
     borderColor: 'white',
-    borderRadius: '20px',
+    borderRadius: 20,
     color: '#dfdfdf',
   },
   input: {

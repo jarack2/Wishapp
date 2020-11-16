@@ -65,6 +65,7 @@ const LandingPage = (props) => {
   const [wishList, setWishList] = useState();
 
   const user = useContext(UserContext); // holds the current user  
+
   let wishes =  [{
     name: 'To have a million dollers!',
     icon: 'bell',
@@ -96,7 +97,20 @@ const LandingPage = (props) => {
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
   });
-
+  
+  useEffect(()  => {
+  // firebase.db.collection("wishes").doc(user.uid).collection("wishList").get()
+  // .then(querySnapshot => {
+  //         querySnapshot.forEach(doc => {
+  //         console.log(doc.id, " => ", doc.data().title);
+  //         wishes.push({key: doc.data().title.text});
+  //         console.log(wishes);
+  //         });
+  // });
+});
+  // firebase.db.collection('users').doc(user.uid).set({
+  //   username: user.email,
+  // });
 
   return (
     <>           

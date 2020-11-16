@@ -58,14 +58,14 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   },
   title: {
-    fontSize: '48px',
+    fontSize: 48,
     color: 'white',
-    marginVertical: '80px',
+    marginVertical: 80,
     textAlign: 'center',
   },
 });

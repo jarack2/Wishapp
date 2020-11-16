@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, Component } from 'react';
 import {
   Button,
   Text,
@@ -12,6 +12,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+import DatePicker from 'react-native-datepicker';
+
 import {
   TextInput
 } from '../components';
@@ -23,6 +25,7 @@ import { UserContext } from "../providers/UserProvider";
 
 
 const AddWish = (props) => {
+    const [date, setDate] = useState('11-13-2020');
     const [title, setTitle] = useState();
     const [descript, setDescript] = useState();
     const user = useContext(UserContext); // holds the current user 
@@ -44,7 +47,7 @@ const AddWish = (props) => {
       style={styles.image}
     >
       <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
+        {/* <ScrollView style={styles.scrollView}> */}
             <TextInput
                 placeholder="Title"
                 placeholderTextColor="#838383"
@@ -55,6 +58,32 @@ const AddWish = (props) => {
                 placeholderTextColor="#838383" 
                 onChangeText={(text) => setDescript({text})}               
             />
+            <DatePicker
+          style={styles.datePickerStyle}
+          date={date} // Initial date from state
+          mode="date" // The enum of date, datetime and time
+          placeholder="select date"
+          format="DD-MM-YYYY"
+          minDate="11-13-2020"
+          maxDate="12-31-2025"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              //display: 'none',
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0,
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          onDateChange={(date) => {
+            setDate(date);
+          }}
+        />
             <TouchableHighlight
                 overlayColor="#FFFFFF"
                 style={styles.buttons}
@@ -62,7 +91,7 @@ const AddWish = (props) => {
           >
             <Text style={styles.buttonLabels}>Confirm Wish</Text>
           </TouchableHighlight>
-        </ScrollView>
+        {/* </ScrollView> */}
         </SafeAreaView>
       </ImageBackground>
     </>
@@ -88,11 +117,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 20,
     flexDirection: 'column',
-    //justifyContent: 'center',
-    //alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "powderblue",
   },
   scrollView: {
-    marginHorizontal: 15,  
+    marginHorizontal: 15,
+    backgroundColor: "powderblue",
   },
   text: {
     fontSize: 40,
@@ -106,10 +137,14 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
-  }
+  },
+  datePickerStyle: {
+    width: 200,
+    marginTop: 20,
+  },
 });//random
 
 export default AddWish;

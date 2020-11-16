@@ -86,18 +86,18 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   title: {
-    fontSize: '48px',
+    fontSize: 48,
     color: 'white',
-    margin: '48px',
+    margin: 48,
     textAlign: 'center', 
-    marginVertical: '50px'
+    marginVertical: 50
   },
   subtitle: {
-    fontSize: '32px',
+    fontSize: 32,
     color: 'white',
-    margin: '12px',
+    margin: 12,
     textAlign: 'center', 
-    marginVertical: '12px'
+    marginVertical: 12
   },
   label: {
     color: 'red',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   buttonLabels: {
     color: 'white',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   },
@@ -123,14 +123,14 @@ const styles = StyleSheet.create({
   error: {
     color: 'white',
     backgroundColor: 'red',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   },
   success: {
     color: 'white',
     backgroundColor: 'green',
-    fontWeight: 100,
+    fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
   }
