@@ -14,61 +14,56 @@ import {
 } from 'react-native';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-import { UserContext } from "../providers/UserProvider";
+import { UserContext } from '../providers/UserProvider';
 import { CardList } from '../components';
-
-
 
 const WishScreen = (props) => {
   const [wishList, setWishList] = useState();
-  const user = useContext(UserContext); // holds the current user  
-  let wishes =  [{
-    name: 'To have a million dollers!',
-    icon: 'bell',
-    iconColor: 'white',
-    iconSize: 32    
-  },
-  {
-    name: 'To Run a marathon!',
-    icon: 'bell',
-    iconColor: 'white',
-    iconSize: 32    
-  },
-  {
-    name: 'To graduate!',
-    icon: 'bell',
-    iconColor: 'white',
-    iconSize: 32    
-  },];  
-
+  const user = useContext(UserContext); // holds the current user
+  let wishes = [
+    {
+      name: 'To have a million dollers!',
+      icon: 'bell',
+      iconColor: 'white',
+      iconSize: 32,
+    },
+    {
+      name: 'To Run a marathon!',
+      icon: 'bell',
+      iconColor: 'white',
+      iconSize: 32,
+    },
+    {
+      name: 'To graduate!',
+      icon: 'bell',
+      iconColor: 'white',
+      iconSize: 32,
+    },
+  ];
 
   //   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
-//   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
-//     snapshot.docs.forEach(doc => {
-//          let wishDoc = doc.data();
-//          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
-//          console.log("Firebas.db.collection line 25");
-//      });
-//     setWishList(wishes);
-// });
-
-
+  //   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+  //     snapshot.docs.forEach(doc => {
+  //          let wishDoc = doc.data();
+  //          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
+  //          console.log("Firebas.db.collection line 25");
+  //      });
+  //     setWishList(wishes);
+  // });
 
   return (
     <>
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
-      {/* Main Content */}
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.ListContainer}>
-          <CardList cards={wishes} />
-          </View>
-        </ScrollView>
+      <ImageBackground
+        source={require('../assets/background.png')}
+        style={styles.image}
+      >
+        {/* Main Content */}
+        <SafeAreaView style={styles.container}>
+          <ScrollView style={styles.scrollView}>
+            <CardList cards={wishes} />
+          </ScrollView>
         </SafeAreaView>
-    </ImageBackground>
+      </ImageBackground>
     </>
   );
 };
@@ -78,16 +73,16 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     flexDirection: 'column',
     alignItems: 'center',
-   },
-   image: {
+  },
+  image: {
     flex: 1,
     resizeMode: 'cover',
   },
-   item: {
-     padding: 10,
-     fontSize: 18,
-     height: 44,
-   },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
   container: {
     flex: 20,
     flexDirection: 'column',
@@ -95,7 +90,7 @@ const styles = StyleSheet.create({
     //alignItems: 'center',
   },
   scrollView: {
-    marginHorizontal: 15,    
+    marginHorizontal: 15,
   },
   text: {
     fontSize: 40,
@@ -112,7 +107,7 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
-  }
+  },
 });
 
 export default WishScreen;
