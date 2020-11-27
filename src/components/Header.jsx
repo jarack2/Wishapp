@@ -43,10 +43,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   title: {
-    // fontSize: 48,
-    // color: 'white',
-    // marginVertical: 80,
-    // textAlign: 'center',
+    fontSize: 32,
+    color: 'white',
+    marginLeft: 12,
   },
 });
 
