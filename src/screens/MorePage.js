@@ -6,6 +6,7 @@ import { CardList } from '../components';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
+import SafeView from '../components/SafeView';
 
 const log = () => console.log('this menu is poopy');
 
@@ -57,12 +58,14 @@ const options = [
 
 const MorePage = () => {
   return (
+    <SafeView>
     <ImageBackground
       source={require('../assets/background.png')}
       style={styles.image}
     >
       <CardList cards={options} />
-    </ImageBackground>
+    </ImageBackground>   
+    </SafeView>
   );
 };
 

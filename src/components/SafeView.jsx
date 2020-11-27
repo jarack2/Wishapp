@@ -1,19 +1,24 @@
 import React from 'react';
 import { View, SafeAreaView, Platform, StyleSheet } from 'react-native';
 
-const SafeView = ({ children, style, ...props }) => {
+const SafeView = ({ children, viewStyles, ...props }) => {
   const platform = Platform.OS;
   let result;
   if (platform == 'ios') {
     result = (
-      <SafeAreaView style={style} {...props}>
+      <SafeAreaView style={[viewStyles, styles.all]} {...props}>
         {children}
       </SafeAreaView>
     );
-  } else {
-    // android, web
+  } else if (platform == 'android') {
     result = (
-      <View style={[style, styles.android]} {...props}>
+      <View style={[viewStyles, styles.android, styles.all]} {...props}>
+        {children}
+      </View>
+    );
+  } else {
+    result = (
+      <View style={[viewStyles, styles.all]} {...props}>
         {children}
       </View>
     );
@@ -24,6 +29,9 @@ const SafeView = ({ children, style, ...props }) => {
 const styles = StyleSheet.create({
   android: {
     marginTop: 20,
+  },
+  all: {
+    flex: 1,
   },
 });
 
