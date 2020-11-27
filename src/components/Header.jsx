@@ -16,7 +16,7 @@ const Header = ({ children, scrollable, title }) => (
     <SafeView>
       {scrollable ? (
         <ScrollView style={styles.scrollView}>
-          <Text>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
           {children}
         </ScrollView>
       ) : (
