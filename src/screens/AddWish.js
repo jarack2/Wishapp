@@ -40,13 +40,11 @@ const AddWish = (props) => {
     }
 
     return (
-    <>
-      {/* Main Content */}
     <ImageBackground
       source={require('../assets/background.png')}
       style={styles.image}
     >
-      <SafeAreaView style={styles.container}>
+     
         {/* <ScrollView style={styles.scrollView}> */}
             <TextInput
                 placeholder="Title"
@@ -92,9 +90,7 @@ const AddWish = (props) => {
             <Text style={styles.buttonLabels}>Confirm Wish</Text>
           </TouchableHighlight>
         {/* </ScrollView> */}
-        </SafeAreaView>
       </ImageBackground>
-    </>
   );
 };//comment
 
