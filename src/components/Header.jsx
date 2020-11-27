@@ -21,7 +21,7 @@ const Header = ({ children, scrollable, title }) => (
         </ScrollView>
       ) : (
         <View>
-          <Text>{title}</Text>
+          <Text style={styles.title}>{title}</Text>
           {children}
         </View>
       )}
@@ -30,17 +30,23 @@ const Header = ({ children, scrollable, title }) => (
 );
 
 const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
   container: {
     flex: 1,
     flexDirection: 'column',
   },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
   scrollView: {
     marginHorizontal: 15,
     backgroundColor: 'transparent',
+  },
+  title: {
+    // fontSize: 48,
+    // color: 'white',
+    // marginVertical: 80,
+    // textAlign: 'center',
   },
 });
 
