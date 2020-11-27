@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
 import { CardList } from '../components';
 

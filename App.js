@@ -27,8 +27,8 @@ function TabNav() {
         <Tab.Screen name="LandingPage" component={LandingPage} options={{tabBarLabel: 'Home'}}/>
         <Tab.Screen name="WishScreen" component={WishScreen} options={{tabBarLabel: 'Wishes'}}/>
         <Tab.Screen name="AddWish" component={AddWish} options={{tabBarLabel: 'Add Wish'}}/>
-        <Tab.Screen name="settings" component={settings} options={{tabBarLabel: 'settings'}}/>
         <Tab.Screen name="More" component={MorePage} options={{tabBarLabel: 'More'}}/>
+        <Tab.Screen name="settings" component={settings} options={{tabBarLabel: 'settings'}}/>
       </Tab.Navigator>
   );
 }
