@@ -1,43 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  Button,
-  Text,
-  TextInput,
-  View,
-  ImageBackground,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  FlatList,
-  TouchableHighlight,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
-import { CardList } from '../components';
+import { CardList, Header } from '../components';
 
 const WishScreen = (props) => {
   const [wishList, setWishList] = useState();
   const user = useContext(UserContext); // holds the current user
+
+  let iconStyles = {
+    icon: 'star',
+    iconColor: 'white',
+    iconSize: 32,
+    iconType: 'font-awesome5',
+  };
+
   let wishes = [
     {
       name: 'To have a million dollers!',
-      icon: 'bell',
-      iconColor: 'white',
-      iconSize: 32,
+      ...iconStyles,
     },
     {
       name: 'To Run a marathon!',
-      icon: 'bell',
-      iconColor: 'white',
-      iconSize: 32,
+      ...iconStyles,
     },
     {
       name: 'To graduate!',
-      icon: 'bell',
-      iconColor: 'white',
-      iconSize: 32,
+      ...iconStyles,
     },
   ];
 
@@ -53,17 +43,13 @@ const WishScreen = (props) => {
 
   return (
     <>
-      <ImageBackground
-        source={require('../assets/background.png')}
-        style={styles.image}
-      >
-        {/* Main Content */}
+      <Header title="Wishes" scrollable>
         <SafeAreaView style={styles.container}>
           <ScrollView style={styles.scrollView}>
             <CardList cards={wishes} />
           </ScrollView>
         </SafeAreaView>
-      </ImageBackground>
+      </Header>
     </>
   );
 };
@@ -86,8 +72,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 20,
     flexDirection: 'column',
-    //justifyContent: 'center',
-    //alignItems: 'center',
   },
   scrollView: {
     marginHorizontal: 15,

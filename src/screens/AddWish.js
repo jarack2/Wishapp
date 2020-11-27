@@ -1,126 +1,82 @@
-import React, { useContext, useEffect, useState, Component } from 'react';
-import {
-  Button,
-  Text,
-  View,
-  ImageBackground,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  FlatList,
-  TouchableHighlight,
-} from 'react-native';
-
+import React, { useContext, useState } from 'react';
+import { Text, StyleSheet, TouchableHighlight } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
-import {
-  TextInput
-} from '../components';
+import { TextInput, Header } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-import { UserContext } from "../providers/UserProvider";
-
-
+import { UserContext } from '../providers/UserProvider';
 
 const AddWish = (props) => {
-    const [date, setDate] = useState('11-13-2020');
-    const [title, setTitle] = useState();
-    const [descript, setDescript] = useState();
-    const user = useContext(UserContext); // holds the current user 
+  const [date, setDate] = useState('11-13-2020');
+  const [title, setTitle] = useState();
+  const [descript, setDescript] = useState();
+  const user = useContext(UserContext); // holds the current user
 
-    const confirmWishHandler = (title, descript, user) => {
-      var title2 = title.toString();
-      firebase.db.collection('wishes').doc(user.uid).collection('wishList').doc().set({        
-        title: title,  
-        wish: descript
+  const confirmWishHandler = (title, descript, user) => {
+    var title2 = title.toString();
+    firebase.db
+      .collection('wishes')
+      .doc(user.uid)
+      .collection('wishList')
+      .doc()
+      .set({
+        title: title,
+        wish: descript,
       });
-      props.navigation.navigate('WishScreen');
-    }
+    props.navigation.navigate('WishScreen');
+  };
 
-    return (
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
-     
-        {/* <ScrollView style={styles.scrollView}> */}
-            <TextInput
-                placeholder="Title"
-                placeholderTextColor="#838383"
-                onChangeText={(text) => setTitle({text})}
-            />
-            <TextInput
-                placeholder="Describe your wish"
-                placeholderTextColor="#838383" 
-                onChangeText={(text) => setDescript({text})}               
-            />
-            <DatePicker
-          style={styles.datePickerStyle}
-          date={date} // Initial date from state
-          mode="date" // The enum of date, datetime and time
-          placeholder="select date"
-          format="DD-MM-YYYY"
-          minDate="11-13-2020"
-          maxDate="12-31-2025"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              //display: 'none',
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(date) => {
-            setDate(date);
-          }}
-        />
-            <TouchableHighlight
-                overlayColor="#FFFFFF"
-                style={styles.buttons}
-                onPress={() => confirmWishHandler(title, descript, user)}
-          >
-            <Text style={styles.buttonLabels}>Confirm Wish</Text>
-          </TouchableHighlight>
-        {/* </ScrollView> */}
-      </ImageBackground>
+  return (
+    <Header title="Add Wish">
+      <TextInput
+        placeholder="Title"
+        placeholderTextColor="#838383"
+        onChangeText={(text) => setTitle({ text })}
+      />
+      <TextInput
+        placeholder="Describe your wish"
+        placeholderTextColor="#838383"
+        onChangeText={(text) => setDescript({ text })}
+      />
+      <DatePicker
+        style={styles.datePickerStyle}
+        date={date} // Initial date from state
+        mode="date" // The enum of date, datetime and time
+        placeholder="select the deadline for your wish"
+        format="DD-MM-YYYY"
+        minDate="11-30-2020"
+        maxDate="12-31-2025"
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0,
+          },
+          dateInput: {
+            marginLeft: 36,
+          },
+        }}
+        onDateChange={(date) => {
+          setDate(date);
+        }}
+      />
+      <TouchableHighlight
+        overlayColor="#FFFFFF"
+        style={styles.buttons}
+        onPress={() => confirmWishHandler(title, descript, user)}
+      >
+        <Text style={styles.buttonLabels}>Confirm Wish</Text>
+      </TouchableHighlight>
+    </Header>
   );
-};//comment
+};
 
 const styles = StyleSheet.create({
-  ListContainer: {
-    flex: 1,
-    paddingTop: 22,
-    flexDirection: 'column',
-    alignItems: 'center',
-   },
-   image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-   item: {
-     padding: 10,
-     fontSize: 18,
-     height: 44,
-   },
-  container: {
-    flex: 20,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: "powderblue",
-  },
-  scrollView: {
-    marginHorizontal: 15,
-    backgroundColor: "powderblue",
-  },
   text: {
     fontSize: 40,
   },
@@ -141,6 +97,6 @@ const styles = StyleSheet.create({
     width: 200,
     marginTop: 20,
   },
-});//random
+});
 
 export default AddWish;

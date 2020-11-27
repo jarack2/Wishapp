@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
 
-import { CardList } from '../components';
+import { CardList, Header } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
-import SafeView from '../components/SafeView';
 
 const log = () => console.log('this menu is poopy');
 
@@ -56,24 +55,13 @@ const options = [
   },
 ];
 
-const MorePage = () => {
+const MorePage = (props) => {
+  props.navigation.navigate('home');
   return (
-    <SafeView>
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
+    <Header title="more">
       <CardList cards={options} />
-    </ImageBackground>   
-    </SafeView>
+    </Header>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-});
 
 export default MorePage;
