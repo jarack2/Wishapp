@@ -17,40 +17,39 @@ import 'firebase/firestore';
 import { UserContext } from "../providers/UserProvider";
 import { CardList } from '../components';
 
-
+var wishListData = null;
 
 const WishScreen = (props) => {
   const [wishList, setWishList] = useState();
   const user = useContext(UserContext); // holds the current user  
-  let wishes =  [{
-    name: 'To have a million dollers!',
-    icon: 'bell',
-    iconColor: 'white',
-    iconSize: 32    
-  },
-  {
-    name: 'To Run a marathon!',
-    icon: 'bell',
-    iconColor: 'white',
-    iconSize: 32    
-  },
-  {
-    name: 'To graduate!',
-    icon: 'bell',
-    iconColor: 'white',
-    iconSize: 32    
-  },];  
+  let wishes =  [];  
 
 
   //   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
-//   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
-//     snapshot.docs.forEach(doc => {
-//          let wishDoc = doc.data();
-//          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
-//          console.log("Firebas.db.collection line 25");
-//      });
-//     setWishList(wishes);
-// });
+  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+    snapshot.docs.forEach(doc => {
+         let wishDoc = doc.data();
+         wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
+         console.log(wishDoc);
+     });
+    if(wishListData == null){
+      setWishList(wishes);
+      wishListData = wishes;
+    }
+    else{
+      const wishListChanged = (newWishes) => {
+        if (newWishes.length !== wishListData.length) {
+          return true;
+        }
+        //for (let i = 0; )
+      };
+      
+      if (wishListChanged(wishes)) {
+        wishListData = wishes;
+        setWishList(wishes);
+      }
+    }
+});
 
 
 
@@ -64,7 +63,7 @@ const WishScreen = (props) => {
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.ListContainer}>
-          <CardList cards={wishes} />
+          {/* <CardList cards={wishList} /> */}
           </View>
         </ScrollView>
         </SafeAreaView>

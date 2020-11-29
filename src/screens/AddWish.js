@@ -12,7 +12,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import DatePicker from 'react-native-datepicker';
+//import DatePicker from 'react-native-datepicker';
 
 import {
   TextInput
@@ -25,7 +25,7 @@ import { UserContext } from "../providers/UserProvider";
 
 
 const AddWish = (props) => {
-    const [date, setDate] = useState('11-13-2020');
+    // const [date, setDate] = useState('11-13-2020');
     const [title, setTitle] = useState();
     const [descript, setDescript] = useState();
     const user = useContext(UserContext); // holds the current user 
@@ -58,7 +58,7 @@ const AddWish = (props) => {
                 placeholderTextColor="#838383" 
                 onChangeText={(text) => setDescript({text})}               
             />
-            <DatePicker
+            {/* <DatePicker
           style={styles.datePickerStyle}
           date={date} // Initial date from state
           mode="date" // The enum of date, datetime and time
@@ -83,7 +83,7 @@ const AddWish = (props) => {
           onDateChange={(date) => {
             setDate(date);
           }}
-        />
+        /> */}
             <TouchableHighlight
                 overlayColor="#FFFFFF"
                 style={styles.buttons}
@@ -141,10 +141,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
-  datePickerStyle: {
-    width: 200,
-    marginTop: 20,
-  },
+  // datePickerStyle: {
+  //   width: 200,
+  //   marginTop: 20,
+  // },
 });//random
 
 export default AddWish;

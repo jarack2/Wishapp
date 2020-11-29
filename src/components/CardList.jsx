@@ -2,34 +2,34 @@ import React from 'react';
 import { StyleSheet, TouchableHighlight } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 
-const CardList = ({ cards }) => {
-  return (
-    <>
-      {cards.map((card) => (
-        <Card containerStyle={cardStyles} key={card.name}>
-          <TouchableHighlight
-            key={card.name}
-            onPress={() => (card.action ? card.action() : undefined)}
-            underlayColor="#8B008B"
-          >
-            <Card.FeaturedTitle style={styles.title}>
-              {card.icon ? (
-                <Icon
-                  name={card.icon}
-                  color={card.iconColor ? card.iconColor : 'white'}
-                  size={card.iconSize ? card.iconSize : 32}
-                  style={styles.icon}
-                  type={card.iconType}
-                />
-              ) : undefined}
-              {card.name}
-            </Card.FeaturedTitle>
-          </TouchableHighlight>
-        </Card>
-      ))}
-    </>
-  );
-};
+const CardList = []//( cards ) => {
+//   return (
+//     <>
+//       {cards.map((card) => (
+//         <Card containerStyle={cardStyles} key={card.name}>
+//           <TouchableHighlight
+//             key={card.name}
+//             onPress={() => (card.action ? card.action() : undefined)}
+//             underlayColor="#8B008B"
+//           >
+//             <Card.FeaturedTitle style={styles.title}>
+//               {card.icon ? (
+//                 <Icon
+//                   name={card.icon}
+//                   color={card.iconColor ? card.iconColor : 'white'}
+//                   size={card.iconSize ? card.iconSize : 32}
+//                   style={styles.icon}
+//                   type={card.iconType}
+//                 />
+//               ) : undefined}
+//               {card.name}
+//             </Card.FeaturedTitle>
+//           </TouchableHighlight>
+//         </Card>
+//       ))}
+//     </>
+//   );
+// };
 
 const cardStyles = {
   borderColor: 'transparent',
