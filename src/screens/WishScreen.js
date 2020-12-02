@@ -17,6 +17,8 @@ import 'firebase/firestore';
 import { UserContext } from "../providers/UserProvider";
 import { CardList } from '../components';
 
+
+
 var wishListData = null;
 
 const WishScreen = (props) => {
@@ -29,7 +31,7 @@ const WishScreen = (props) => {
   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
          let wishDoc = doc.data();
-         wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
+         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram' });
          console.log(wishDoc);
      });
     if(wishListData == null){
@@ -41,10 +43,8 @@ const WishScreen = (props) => {
         if (newWishes.length !== wishListData.length) {
           return true;
         }
-        //for (let i = 0; )
-      };
-      
-      if (wishListChanged(wishes)) {
+      };      
+    if (wishListChanged(wishes)) {
         wishListData = wishes;
         setWishList(wishes);
       }
