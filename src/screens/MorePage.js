@@ -1,76 +1,66 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import React from 'react';
 
-import { CardList } from '../components';
+import { CardList, Header } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-import { UserContext } from '../providers/UserProvider';
 
 const log = () => console.log('this menu is poopy');
 
-const signOut = (props) => {
+const signOut = (navigation) => {
   firebase.auth().signOut();
-  // props.navigation.navigate('home');
+  navigation.navigate('Home');
 };
-const options = [
-  {
-    name: 'Sign Out',
-    icon: 'unlock',
-    iconType: 'evilicon',
-    iconColor: 'white',
-    iconSize: 32,
+const options = (navigation) => {
+  return [
+    {
+      name: 'Sign Out',
+      icon: 'unlock',
+      iconType: 'evilicon',
+      iconColor: 'white',
+      iconSize: 32,
+      action: () => signOut(navigation),
+    },
+    {
+      name: 'Your Account',
+      icon: 'account-circle',
+      iconType: 'font-awesome5',
+      action: () => log(),
+    },
+    {
+      name: 'Notifications',
+      icon: 'bell',
+      iconType: 'evilicon',
+      action: () => log(),
+    },
+    {
+      name: 'Feedback',
+      icon: 'sc-telegram',
+      iconType: 'evilicon',
+      action: () => log(),
+    },
+    {
+      name: 'Dark Mode',
+      icon: 'ios-american-football',
+      iconType: 'ionicon',
+      action: () => log(),
+    },
+    {
+      name: 'Terms of Service',
+      icon: 'heartbeat',
+      iconType: 'font-awesome',
+      action: () => log(),
+    },
+  ];
+};
 
-    action: () => signOut(),
-  },
-  {
-    name: 'Your Account',
-    icon: 'account-circle',
-    iconType: 'font-awesome5',
-    action: () => log(),
-  },
-  {
-    name: 'Notifications',
-    icon: 'bell',
-    iconType: 'evilicon',
-    action: () => log(),
-  },
-  {
-    name: 'Feedback',
-    icon: 'sc-telegram',
-    iconType: 'evilicon',
-    action: () => log(),
-  },
-  {
-    name: 'Dark Mode',
-    icon: 'ios-american-football',
-    iconType: 'ionicon',
-    action: () => log(),
-  },
-  {
-    name: 'Terms of Service',
-    icon: 'heartbeat',
-    iconType: 'font-awesome',
-    action: () => log(),
-  },
-];
-
-const MorePage = () => {
+const MorePage = ({ navigation }) => {
+  const settings = options(navigation);
   return (
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
-      <CardList cards={options} />
-    </ImageBackground>
+    <Header title="More">
+      <CardList cards={settings} />
+    </Header>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-});
 
 export default MorePage;
