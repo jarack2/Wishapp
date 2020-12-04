@@ -8,10 +8,10 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
+*.log
 .vscode
 .expo
 web-build/
 firebaseConfig.js
 # macOS
 .DS_Store
-*.log
