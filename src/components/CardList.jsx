@@ -44,6 +44,7 @@ const cardStyles = {
   shadowRadius: 7.49,
   elevation: 18,
   opacity: 0.85,
+  minWidth: '50%',
 };
 
 const styles = StyleSheet.create({
