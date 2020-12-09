@@ -61,11 +61,7 @@ const options = [
 
 const MorePage = () => {
   return (
-    <>
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
+    <Header title="More">
        <View style={{
         flex: 1,
         flexDirection: 'column',
@@ -79,15 +75,13 @@ const MorePage = () => {
               <Text> Username: </Text>
               </View>
               <Image
-            source={require('../assets/avatar_default.png')}
-            style={{ width: screenHeight/8, height: screenHeight/8, borderRadius: 200 / 2, marginHorizontal: 10}}
-          ></Image>
-            
+                source={require('../assets/avatar_default.png')}
+                style={{ width: screenHeight/8, height: screenHeight/8, borderRadius: 200 / 2, marginHorizontal: 10}}
+              />
           </View>
       </View>
-      <CardList cards={options} />
-    </ImageBackground>
-    </>
+      <CardList cards={settings} titleStyles={{marginLeft: '40%'}}/>
+    </Header>
   );
 };
 
