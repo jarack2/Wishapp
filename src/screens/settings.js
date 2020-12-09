@@ -85,7 +85,7 @@ export default class settings extends Component {
   const styles = StyleSheet.create({
   
       title: {
-        fontSize: '48px',
+        fontSize: 48,
         color: 'white',
         textAlign: 'center',
       },
