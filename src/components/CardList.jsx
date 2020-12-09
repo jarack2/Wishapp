@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableHighlight } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 
-const CardList = ({ cards, titleStyles }) => {
+const CardList = ({ cards }) => {
   return (
     <>
       {cards.map((card) => (
@@ -12,7 +12,7 @@ const CardList = ({ cards, titleStyles }) => {
             onPress={() => (card.action ? card.action() : undefined)}
             underlayColor="#8B008B"
           >
-            <Card.FeaturedTitle style={[styles.title, titleStyles]}>
+            <Card.FeaturedTitle style={styles.title}>
               {card.icon ? (
                 <Icon
                   name={card.icon}
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 24,
-    marginLeft: '35%',
+    textAlign: 'center',
   },
 });
 export default CardList;
