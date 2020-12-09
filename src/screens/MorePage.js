@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet,View,Image,Dimensions,Text } from 'react-native';
 
-import { CardList } from '../components';
+import { CardList, Header } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -17,7 +17,7 @@ const signOut = (props) => {
   firebase.auth().signOut();
   // props.navigation.navigate('home');
 };
-const options = [
+const settings = [
   {
     name: 'Sign Out',
     icon: 'unlock',
