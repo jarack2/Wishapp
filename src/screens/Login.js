@@ -77,7 +77,7 @@ const Login = (props) => {
                 if (user) {
                   props.navigation.navigate('Wishful');
                 } else {
-                  seterrorMessage("An error has occurred. Please try again.");
+                  // seterrorMessage("An error has occurred. Please try again.");
                   // setSpinner(false);
                 }
               });         

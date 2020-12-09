@@ -89,16 +89,16 @@ const LandingPage = (props) => {
   // });
   //let data = await firebase.firestore().collection("wishes").doc(user.uid).collection("wishList").get();
   //console.log(data);
-
-  firebase.db.collection('users').doc(user.uid).set({
-    username: user.email,
-  });
+  if (user) {
+    firebase.db.collection('users').doc(user.uid).set({
+      username: user.email,
+    });
+  }
 
   return (
     <>
       {/* Main Content */}
       <Header title="Home" scrollable>
-        
         <View
           style={{
             flex: 1,
