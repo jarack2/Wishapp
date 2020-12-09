@@ -1,15 +1,24 @@
 import React, { useContext, useState } from 'react';
-import { Text, StyleSheet, TouchableHighlight } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import { Text, StyleSheet, TouchableHighlight,Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { TextInput, Header } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
+import { withTheme } from 'react-native-elements';
 
 const AddWish = (props) => {
-  const [date, setDate] = useState('11-13-2020');
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
   const [title, setTitle] = useState();
   const [descript, setDescript] = useState();
   const user = useContext(UserContext); // holds the current user
@@ -29,7 +38,8 @@ const AddWish = (props) => {
   };
 
   return (
-    <Header title="Add Wish">
+    <Header title="Add Wish"
+    style={styles.HeaderStyle}>
       <TextInput
         placeholder="Title"
         placeholderTextColor="#838383"
@@ -40,31 +50,15 @@ const AddWish = (props) => {
         placeholderTextColor="#838383"
         onChangeText={(text) => setDescript({ text })}
       />
-      <DatePicker
-        style={styles.datePickerStyle}
-        date={date} // Initial date from state
-        mode="date" // The enum of date, datetime and time
-        placeholder="select the deadline for your wish"
-        format="DD-MM-YYYY"
-        minDate="11-30-2020"
-        maxDate="12-31-2025"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: 'absolute',
-            left: 0,
-            top: 4,
-            marginLeft: 0,
-          },
-          dateInput: {
-            marginLeft: 36,
-          },
-        }}
-        onDateChange={(date) => {
-          setDate(date);
-        }}
-      />
+      <DateTimePicker
+          style={styles.DateTimePicker}
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
       <TouchableHighlight
         overlayColor="#FFFFFF"
         style={styles.buttons}
@@ -93,10 +87,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
-  datePickerStyle: {
-    width: 200,
+  DateTimePicker: {
+    width: 122,
     marginTop: 20,
+    marginLeft: 120,
+    marginBottom: 40,
+    backgroundColor: 'white',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
+  HeaderStyle: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 export default AddWish;
