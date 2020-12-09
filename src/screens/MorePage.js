@@ -58,7 +58,7 @@ const MorePage = ({ navigation }) => {
   const settings = options(navigation);
   return (
     <Header title="More">
-      <CardList cards={settings} titleStyles={{marginLeft: '40%'}}/>
+      <CardList cards={settings} />
     </Header>
   );
 };
