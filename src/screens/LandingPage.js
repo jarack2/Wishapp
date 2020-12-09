@@ -98,6 +98,7 @@ const LandingPage = (props) => {
     <>
       {/* Main Content */}
       <Header title="Home" scrollable>
+        
         <View
           style={{
             flex: 1,
