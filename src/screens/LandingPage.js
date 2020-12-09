@@ -60,24 +60,34 @@ const chartConfig = {
     borderRadius: 10
   },
 };
-
+var wishListData = null;
 const LandingPage = (props) => {
-  const [wishList, setWishList] = useState();
-
+  const [wishList, setWishList] = useState([]);
   const user = useContext(UserContext); // holds the current user  
+  let wishes =  [];  
 
-
-  let wishes =  [];
-//THIS CODE IS CAUSING THE DATABASE TO BE PINGED TO MUCH. DO NOT UNCOMMENT UNLESS DEBUGGING
-firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
          let wishDoc = doc.data();
-         wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });        
+         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
+         console.log(wishDoc);
      });
-    setWishList(wishes);
+    if(wishListData == null){
+      setWishList(wishes);
+      wishListData = wishes;
+    }
+    else{
+      const wishListChanged = (newWishes) => {
+        if (newWishes.length !== wishListData.length) {
+          return true;
+        }
+      };      
+    if (wishListChanged(wishes)) {
+        wishListData = wishes;
+        setWishList(wishes);
+      }
+    }
 });
-  //let data = await firebase.firestore().collection("wishes").doc(user.uid).collection("wishList").get();
-  //console.log(data);
   
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
@@ -123,9 +133,9 @@ firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then
           chartConfig={chartConfig}
           hideLegend={false}
         />
-        {/* <View style={styles.container}>
+        <View style={styles.container}>
           <CardList cards={wishList} />
-        </View> */}
+        </View> 
             
         </ScrollView>
         </SafeAreaView>

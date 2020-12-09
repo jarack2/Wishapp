@@ -22,16 +22,14 @@ import { CardList } from '../components';
 var wishListData = null;
 
 const WishScreen = (props) => {
-  const [wishList, setWishList] = useState();
+  const [wishList, setWishList] = useState([]);
   const user = useContext(UserContext); // holds the current user  
   let wishes =  [];  
 
-
-  //   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
     snapshot.docs.forEach(doc => {
          let wishDoc = doc.data();
-         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram' });
+         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
          console.log(wishDoc);
      });
     if(wishListData == null){
@@ -63,7 +61,7 @@ const WishScreen = (props) => {
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           <View style={styles.ListContainer}>
-          {/* <CardList cards={wishList} /> */}
+          <CardList cards={wishList} /> 
           </View>
         </ScrollView>
         </SafeAreaView>
