@@ -68,44 +68,12 @@ const MorePage = ({ navigation }) => {
   const user = useContext(UserContext); // holds the current user
   return (
     <Header title="More">
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          justifyContent: 'right',
-          alignItems: 'stretch',
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            padding: 20,
-            flexDirection: 'row',
-            justifyContent: 'right',
-            alignItems: 'rigth',
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              padding: 20,
-              flexDirection: 'column',
-              justifyContent: 'right',
-              alignItems: 'right',
-            }}
-          >
-            <Text> Email: {user.email}</Text>
-          </View>
-          <Image
-            source={require('../assets/avatar_default.png')}
-            style={{
-              width: screenHeight / 8,
-              height: screenHeight / 8,
-              borderRadius: 200 / 2,
-              marginHorizontal: 10,
-            }}
-          />
-        </View>
+      <View style={styles.userView}>
+        <Image
+          source={require('../assets/avatar_default.png')}
+          style={styles.image}
+        />
+        <Text style={styles.text}>Email: {user.email}</Text>
       </View>
       <CardList cards={settings} titleStyles={{ marginLeft: '40%' }} />
     </Header>
@@ -113,12 +81,21 @@ const MorePage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  userView: {
+    padding: 20,
+    alignItems: 'flex-end',
+  },
   image: {
-    flex: 1,
-    resizeMode: 'cover',
+    width: screenHeight / 12,
+    height: screenHeight / 12,
+    borderRadius: 200 / 2,
+    marginRight: 48,
   },
   container: {
     alignItems: 'center',
+  },
+  text: {
+    color: 'white',
   },
 });
 
