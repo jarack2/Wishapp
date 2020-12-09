@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet,View,Image,Dimensions,Text } from 'react-native';
 
 import { CardList } from '../components';
 
@@ -8,6 +8,9 @@ import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
 
 const log = () => console.log('this menu is poopy');
+const screenWidth = Dimensions.get("window").width;
+const screenHeight = Dimensions.get("window").height;
+
 
 const signOut = (props) => {
   firebase.auth().signOut();
@@ -57,12 +60,33 @@ const options = [
 
 const MorePage = () => {
   return (
+    <>
     <ImageBackground
       source={require('../assets/background.png')}
       style={styles.image}
     >
+       <View style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'right',
+        alignItems: 'stretch',
+        
+      }}>
+         <View style={{flex: 1,padding :20 ,flexDirection: 'row',justifyContent: 'right',alignItems: 'rigth',}}>
+         <View style={{flex: 1,padding :20 ,flexDirection: 'column',justifyContent: 'right',alignItems: 'right',}}>
+              <Text> Email: </Text>
+              <Text> Username: </Text>
+              </View>
+              <Image
+            source={require('../assets/avatar_default.png')}
+            style={{ width: screenHeight/8, height: screenHeight/8, borderRadius: 200 / 2, marginHorizontal: 10}}
+          ></Image>
+            
+          </View>
+      </View>
       <CardList cards={options} />
     </ImageBackground>
+    </>
   );
 };
 
@@ -70,6 +94,9 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'cover',
+  },
+  container: {
+    alignItems: 'center'
   },
 });
 
