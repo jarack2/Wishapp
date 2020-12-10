@@ -12,7 +12,7 @@ import { UserContext } from '../providers/UserProvider';
 import { withTheme } from 'react-native-elements';
 
 const AddWish = (props) => {
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(true);
   const onChange = (event, selectedDate) => {
