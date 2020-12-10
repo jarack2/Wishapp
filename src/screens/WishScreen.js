@@ -1,27 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  Button,
-  Text,
-  TextInput,
-  View,
-  ImageBackground,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  FlatList,
-  TouchableHighlight,
-} from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-import { UserContext } from "../providers/UserProvider";
-import { CardList } from '../components';
-
-
+import { UserContext } from '../providers/UserProvider';
+import { CardList, Header } from '../components';
 
 var wishListData = null;
 
 const WishScreen = (props) => {
+
   const [wishList, setWishList] = useState([]);
   const user = useContext(UserContext); // holds the current user  
   let wishes =  [];  
@@ -64,8 +51,9 @@ const WishScreen = (props) => {
           <CardList cards={wishList} /> 
           </View>
         </ScrollView>
+
         </SafeAreaView>
-    </ImageBackground>
+      </Header>
     </>
   );
 };
@@ -75,24 +63,22 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     flexDirection: 'column',
     alignItems: 'center',
-   },
-   image: {
+  },
+  image: {
     flex: 1,
     resizeMode: 'cover',
   },
-   item: {
-     padding: 10,
-     fontSize: 18,
-     height: 44,
-   },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
   container: {
     flex: 20,
     flexDirection: 'column',
-    //justifyContent: 'center',
-    //alignItems: 'center',
   },
   scrollView: {
-    marginHorizontal: 15,    
+    marginHorizontal: 15,
   },
   text: {
     fontSize: 40,
@@ -109,7 +95,7 @@ const styles = StyleSheet.create({
     fontWeight: '100',
     textAlign: 'center',
     fontSize: 24,
-  }
+  },
 });
 
 export default WishScreen;

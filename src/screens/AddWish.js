@@ -1,130 +1,79 @@
-import React, { useContext, useEffect, useState, Component } from 'react';
-import {
-  Button,
-  Text,
-  View,
-  ImageBackground,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  FlatList,
-  TouchableHighlight,
-} from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Text, StyleSheet, TouchableHighlight,Platform } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-//import DatePicker from 'react-native-datepicker';
 
-import {
-  TextInput
-} from '../components';
+import { TextInput, Header } from '../components';
+
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
-import { UserContext } from "../providers/UserProvider";
-
-
+import { UserContext } from '../providers/UserProvider';
+import { withTheme } from 'react-native-elements';
 
 const AddWish = (props) => {
-    // const [date, setDate] = useState('11-13-2020');
-    const [title, setTitle] = useState();
-    const [descript, setDescript] = useState();
-    const user = useContext(UserContext); // holds the current user 
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
 
-    const confirmWishHandler = (title, descript, user) => {
-      var title2 = title.toString();
-      firebase.db.collection('wishes').doc(user.uid).collection('wishList').doc().set({        
-        title: title,  
-        wish: descript
+
+  const [title, setTitle] = useState();
+  const [descript, setDescript] = useState();
+  const user = useContext(UserContext); // holds the current user
+
+  const confirmWishHandler = (title, descript, user) => {
+    var title2 = title.toString();
+    firebase.db
+      .collection('wishes')
+      .doc(user.uid)
+      .collection('wishList')
+      .doc()
+      .set({
+        title: title,
+        wish: descript,
       });
-      props.navigation.navigate('WishScreen');
-    }
+    props.navigation.navigate('WishScreen');
+  };
 
-    return (
-    <>
-      {/* Main Content */}
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
-      <SafeAreaView style={styles.container}>
-        {/* <ScrollView style={styles.scrollView}> */}
-            <TextInput
-                placeholder="Title"
-                placeholderTextColor="#838383"
-                onChangeText={(text) => setTitle({text})}
-            />
-            <TextInput
-                placeholder="Describe your wish"
-                placeholderTextColor="#838383" 
-                onChangeText={(text) => setDescript({text})}               
-            />
-            {/* <DatePicker
-          style={styles.datePickerStyle}
-          date={date} // Initial date from state
-          mode="date" // The enum of date, datetime and time
-          placeholder="select date"
-          format="DD-MM-YYYY"
-          minDate="11-13-2020"
-          maxDate="12-31-2025"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              //display: 'none',
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(date) => {
-            setDate(date);
-          }}
-        /> */}
-            <TouchableHighlight
-                overlayColor="#FFFFFF"
-                style={styles.buttons}
-                onPress={() => confirmWishHandler(title, descript, user)}
-          >
-            <Text style={styles.buttonLabels}>Confirm Wish</Text>
-          </TouchableHighlight>
-        {/* </ScrollView> */}
-        </SafeAreaView>
-      </ImageBackground>
-    </>
+  return (
+    <Header title="Add Wish"
+    style={styles.HeaderStyle}>
+      <TextInput
+        placeholder="Title"
+        placeholderTextColor="#838383"
+        onChangeText={(text) => setTitle({ text })}
+      />
+      <TextInput
+        placeholder="Describe your wish"
+        placeholderTextColor="#838383"
+        onChangeText={(text) => setDescript({ text })}
+      />
+      <DateTimePicker
+          style={styles.DateTimePicker}
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      <TouchableHighlight
+        overlayColor="#FFFFFF"
+        style={styles.buttons}
+        onPress={() => confirmWishHandler(title, descript, user)}
+      >
+        <Text style={styles.buttonLabels}>Confirm Wish</Text>
+      </TouchableHighlight>
+    </Header>
   );
-};//comment
+};
 
 const styles = StyleSheet.create({
-  ListContainer: {
-    flex: 1,
-    paddingTop: 22,
-    flexDirection: 'column',
-    alignItems: 'center',
-   },
-   image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-   item: {
-     padding: 10,
-     fontSize: 18,
-     height: 44,
-   },
-  container: {
-    flex: 20,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: "powderblue",
-  },
-  scrollView: {
-    marginHorizontal: 15,
-    backgroundColor: "powderblue",
-  },
   text: {
     fontSize: 40,
   },
@@ -141,10 +90,22 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
-  // datePickerStyle: {
-  //   width: 200,
-  //   marginTop: 20,
-  // },
-});//random
+
+  DateTimePicker: {
+    width: 122,
+    marginTop: 20,
+    marginLeft: 120,
+    marginBottom: 40,
+    backgroundColor: 'white',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  HeaderStyle: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
 
 export default AddWish;
