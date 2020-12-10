@@ -14,7 +14,7 @@ import { withTheme } from 'react-native-elements';
 const AddWish = (props) => {
   const [date, setDate] = useState(new Date())
   const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -63,10 +63,7 @@ const AddWish = (props) => {
         placeholderTextColor="#838383"
         onChangeText={(text) => setDescript({ text })}
       />
-      <View>
-        <Button onPress={showDatePicker} title="Show date picker!"/>
-      </View>
-      {show && (<DateTimePicker
+      <DateTimePicker
           style={styles.DateTimePicker}
           testID="dateTimePicker"
           value={date}
@@ -75,7 +72,7 @@ const AddWish = (props) => {
           display="default"
           onChange={onChange}
         />
-      )}
+      
       <TouchableHighlight
         overlayColor="#FFFFFF"
         style={styles.buttons}
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   DateTimePicker: {
-    width: 122,
+    width: 133,
     marginTop: 20,
     marginLeft: 120,
     marginBottom: 40,
