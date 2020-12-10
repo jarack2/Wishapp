@@ -30,7 +30,6 @@ const CardList = ({ cards, titleStyles }) => {
     </>
   );
 };
-
 const cardStyles = {
   borderColor: 'transparent',
   borderRadius: 6,
@@ -46,7 +45,6 @@ const cardStyles = {
   opacity: 0.85,
   minWidth: '50%',
 };
-
 const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 32,

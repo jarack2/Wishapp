@@ -5,49 +5,53 @@ import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
 import { CardList, Header } from '../components';
 
+var wishListData = null;
+
 const WishScreen = (props) => {
-  const [wishList, setWishList] = useState();
-  const user = useContext(UserContext); // holds the current user
 
-  let iconStyles = {
-    icon: 'star',
-    iconColor: 'white',
-    iconSize: 32,
-    iconType: 'font-awesome5',
-  };
+  const [wishList, setWishList] = useState([]);
+  const user = useContext(UserContext); // holds the current user  
+  let wishes =  [];  
 
-  let wishes = [
-    {
-      name: 'To have a million dollers!',
-      ...iconStyles,
-    },
-    {
-      name: 'To Run a marathon!',
-      ...iconStyles,
-    },
-    {
-      name: 'To graduate!',
-      ...iconStyles,
-    },
-  ];
+  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+    snapshot.docs.forEach(doc => {
+         let wishDoc = doc.data();
+         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
+         console.log(wishDoc);
+     });
+    if(wishListData == null){
+      setWishList(wishes);
+      wishListData = wishes;
+    }
+    else{
+      const wishListChanged = (newWishes) => {
+        if (newWishes.length !== wishListData.length) {
+          return true;
+        }
+      };      
+    if (wishListChanged(wishes)) {
+        wishListData = wishes;
+        setWishList(wishes);
+      }
+    }
+});
 
-  //   THIS CODE IS CAUSING THE DATABASE TO BE PINGED REPEATEDLY. DO NOT UNCOMMENT UNLESS ACTIVELY WORKING TOWARD BUG FIX
-  //   firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
-  //     snapshot.docs.forEach(doc => {
-  //          let wishDoc = doc.data();
-  //          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
-  //          console.log("Firebas.db.collection line 25");
-  //      });
-  //     setWishList(wishes);
-  // });
+
 
   return (
     <>
-      <Header title="Wishes" scrollable>
-        <SafeAreaView style={styles.container}>
-          <ScrollView style={styles.scrollView}>
-            <CardList cards={wishes} />
-          </ScrollView>
+    <ImageBackground
+      source={require('../assets/background.png')}
+      style={styles.image}
+    >
+      {/* Main Content */}
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.ListContainer}>
+          <CardList cards={wishList} /> 
+          </View>
+        </ScrollView>
+
         </SafeAreaView>
       </Header>
     </>
