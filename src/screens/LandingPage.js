@@ -89,8 +89,7 @@ const LandingPage = (props) => {
   return (
     <>
       {/* Main Content */}
-      <Header title="Home" scrollable>
-        
+      <Header title="Home" scrollable>        
         <View
           style={{
             flex: 1,
@@ -122,11 +121,10 @@ const LandingPage = (props) => {
         <View style={styles.container}>
 
           <CardList cards={wishList} />
-        </View> 
-            
-        </ScrollView>
-        </SafeAreaView>
-      </ImageBackground>
+          </View> 
+        </Header>
+     
+    
     </>
   );
 };
