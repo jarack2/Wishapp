@@ -2,7 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Text, StyleSheet, TouchableHighlight,Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+
 import { TextInput, Header } from '../components';
+
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -18,6 +20,7 @@ const AddWish = (props) => {
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
+
 
   const [title, setTitle] = useState();
   const [descript, setDescript] = useState();
@@ -87,6 +90,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
   },
+
   DateTimePicker: {
     width: 122,
     marginTop: 20,
