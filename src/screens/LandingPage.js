@@ -53,7 +53,6 @@ const chartConfig = {
 };
 var wishListData = null;
 const LandingPage = (props) => {
-
   const [wishList, setWishList] = useState([]);
   const user = useContext(UserContext); // holds the current user  
   let wishes =  [];  
@@ -89,7 +88,8 @@ const LandingPage = (props) => {
   return (
     <>
       {/* Main Content */}
-      <Header title="Home" scrollable>        
+
+      <Header title="Home" scrollable>
         <View
           style={{
             flex: 1,
