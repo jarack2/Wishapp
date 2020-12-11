@@ -41,20 +41,10 @@ const WishScreen = (props) => {
   return (
     <>
     <Header title="Wishes" scrollable> 
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
       {/* Main Content */}
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
           <View style={styles.ListContainer}>
-          <CardList cards={wishList} /> 
+            <CardList cards={wishList} /> 
           </View>
-        </ScrollView>
-
-        </SafeAreaView>
-        </ImageBackground>
       </Header>
     </>
   );
