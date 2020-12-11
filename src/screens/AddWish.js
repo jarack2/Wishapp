@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Text, StyleSheet, TouchableHighlight,Platform } from 'react-native';
+import { Text, StyleSheet, TouchableHighlight,Platform , View, Button} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
@@ -14,19 +14,28 @@ import { withTheme } from 'react-native-elements';
 const AddWish = (props) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
   };
 
-
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  }
+  const showDatePicker = () => {
+    showMode('date');
+  }
+  const showTimepicker = () => {
+    showMode('time');
+  }
   const [title, setTitle] = useState();
   const [descript, setDescript] = useState();
   const user = useContext(UserContext); // holds the current user
 
-  const confirmWishHandler = (title, descript, user) => {
+  const confirmWishHandler = (title, date, descript, user) => {
     var title2 = title.toString();
     firebase.db
       .collection('wishes')
@@ -36,13 +45,14 @@ const AddWish = (props) => {
       .set({
         title: title,
         wish: descript,
+        date: date
       });
     props.navigation.navigate('WishScreen');
   };
 
   return (
     <Header title="Add Wish"
-    style={styles.HeaderStyle}>
+      style={styles.HeaderStyle}>
       <TextInput
         placeholder="Title"
         placeholderTextColor="#838383"
@@ -62,10 +72,12 @@ const AddWish = (props) => {
           display="default"
           onChange={onChange}
         />
+      
       <TouchableHighlight
         overlayColor="#FFFFFF"
         style={styles.buttons}
-        onPress={() => confirmWishHandler(title, descript, user)}
+        onPress={() => confirmWishHandler(title, date, descript, user)}
+        
       >
         <Text style={styles.buttonLabels}>Confirm Wish</Text>
       </TouchableHighlight>
@@ -92,7 +104,7 @@ const styles = StyleSheet.create({
   },
 
   DateTimePicker: {
-    width: 122,
+    width: 133,
     marginTop: 20,
     marginLeft: 120,
     marginBottom: 40,

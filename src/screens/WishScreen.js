@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, SafeAreaView, ScrollView, ImageBackground, View } from 'react-native';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
@@ -40,19 +40,11 @@ const WishScreen = (props) => {
 
   return (
     <>
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.image}
-    >
+    <Header title="Wishes" scrollable> 
       {/* Main Content */}
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
           <View style={styles.ListContainer}>
-          <CardList cards={wishList} /> 
+            <CardList cards={wishList} /> 
           </View>
-        </ScrollView>
-
-        </SafeAreaView>
       </Header>
     </>
   );
