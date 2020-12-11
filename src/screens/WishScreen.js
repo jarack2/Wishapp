@@ -42,9 +42,10 @@ const WishScreen = (props) => {
     <>
     <Header title="Wishes" scrollable> 
       {/* Main Content */}
-          <View style={styles.ListContainer}>
-            <CardList cards={wishList} /> 
-          </View>
+          
+            <CardList cards={wishList} 
+            titleStyles={{ marginLeft: 0 }}/> 
+          
       </Header>
     </>
   );
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  
   image: {
     flex: 1,
     resizeMode: 'cover',
