@@ -13,12 +13,19 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jarack.wishapp"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
+    },
+    "description": "",
+    "android": {
+      "package": "com.jarack.wishapp"
     }
   }
 }
