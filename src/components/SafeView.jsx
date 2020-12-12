@@ -5,7 +5,6 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 const statusbar = getStatusBarHeight();
 
 const SafeView = ({ children, viewStyles, ...props }) => {
-  console.log(getStatusBarHeight() + ' is the status bar height');
   return (
     <View style={[viewStyles, styles.all]} {...props}>
       {children}

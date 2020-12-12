@@ -51,44 +51,35 @@ const chartConfig = {
     borderRadius: 10,
   },
 };
-
+var wishListData = null;
 const LandingPage = (props) => {
-  const [wishList, setWishList] = useState();
+  const [wishList, setWishList] = useState([]);
+  const user = useContext(UserContext); // holds the current user  
+  let wishes =  [];  
 
-  const user = useContext(UserContext); // holds the current user
-
-  let iconStyles = {
-    icon: 'star',
-    iconColor: 'white',
-    iconSize: 32,
-    iconType: 'font-awesome5',
-  };
-
-  let wishes = [
-    {
-      name: 'To have a million dollers!',
-      ...iconStyles,
-    },
-    {
-      name: 'To Run a marathon!',
-      ...iconStyles,
-    },
-    {
-      name: 'To graduate!',
-      ...iconStyles,
-    },
-  ];
-
-  //THIS CODE IS CAUSING THE DATABASE TO BE PINGED TO MUCH. DO NOT UNCOMMENT UNLESS DEBUGGING
-  // firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
-  //     snapshot.docs.forEach(doc => {
-  //          let wishDoc = doc.data();
-  //          wishes.push({key: wishDoc.title.text, msg: wishDoc.wish.text });
-  //      });
-  //     setWishList(wishes);
-  // });
-  //let data = await firebase.firestore().collection("wishes").doc(user.uid).collection("wishList").get();
-  //console.log(data);
+  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
+    snapshot.docs.forEach(doc => {
+         let wishDoc = doc.data();
+         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
+         console.log(wishDoc);
+     });
+    if(wishListData == null){
+      setWishList(wishes);
+      wishListData = wishes;
+    }
+    else{
+      const wishListChanged = (newWishes) => {
+        if (newWishes.length !== wishListData.length) {
+          return true;
+        }
+      };      
+    if (wishListChanged(wishes)) {
+        wishListData = wishes;
+        setWishList(wishes);
+      }
+    }
+});
+  
 
   firebase.db.collection('users').doc(user.uid).set({
     username: user.email,
@@ -97,8 +88,8 @@ const LandingPage = (props) => {
   return (
     <>
       {/* Main Content */}
+
       <Header title="Home" scrollable>
-        
         <View
           style={{
             flex: 1,
@@ -128,9 +119,12 @@ const LandingPage = (props) => {
           hideLegend={false}
         />
         <View style={styles.container}>
-          <CardList cards={wishes} />
-        </View>
-      </Header>
+
+          <CardList cards={wishList} />
+          </View> 
+        </Header>
+     
+    
     </>
   );
 };
