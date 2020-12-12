@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Dimensions, Text } from 'react-native';
 
-import { CardList, Header, Modal} from '../components';
+import { CardList, Header, Modal } from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
 
-const log = () => console.log('this menu is poopy');
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
+let modalName;
+let modalContent;
+const log = () => console.log('this is a sample feature.');
 
 const signOut = async (navigation) => {
   await firebase
@@ -20,7 +22,13 @@ const signOut = async (navigation) => {
     });
 };
 
-const options = (navigation) => {
+const openModal = (name, content, setVisible) => {
+  setVisible(true);
+  modalName = name;
+  modalContent = content;
+};
+
+const options = (navigation, setVisible) => {
   return [
     {
       name: 'Sign Out',
@@ -34,19 +42,34 @@ const options = (navigation) => {
       name: 'Your Account',
       icon: 'account-circle',
       iconType: 'font-awesome5',
-      action: () => log(),
+      action: () =>
+        openModal(
+          options(navigation, setVisible)[1].name,
+          <Text>Fart</Text>,
+          setVisible
+        ),
     },
     {
       name: 'Notifications',
       icon: 'bell',
       iconType: 'evilicon',
-      action: () => log(),
+      action: () =>
+        openModal(
+          options(navigation, setVisible)[2].name,
+          <Text>Fart</Text>,
+          setVisible
+        ),
     },
     {
       name: 'Feedback',
       icon: 'sc-telegram',
       iconType: 'evilicon',
-      action: () => log(),
+      action: () =>
+        openModal(
+          options(navigation, setVisible)[3].name,
+          <Text>Fart</Text>,
+          setVisible
+        ),
     },
     {
       name: 'Dark Mode',
@@ -64,9 +87,11 @@ const options = (navigation) => {
 };
 
 const MorePage = ({ navigation }) => {
-  const settings = options(navigation);
-  let modal = true;
+  const [visible, setVisible] = useState(false);
+
+  const settings = options(navigation, setVisible);
   const user = useContext(UserContext); // holds the current user
+
   return (
     <Header title="More">
       <View style={styles.userView}>
@@ -76,10 +101,10 @@ const MorePage = ({ navigation }) => {
         />
         <Text style={styles.text}>Email: {user.email}</Text>
       </View>
-      <CardList cards={settings} titleStyles={{ marginLeft: '40%' }} />
- 
-      { modal ? <Modal/> : undefined }
-
+      <CardList cards={settings} titleStyles={{ marginLeft: 0 }} />
+      <Modal title={modalName} visible={visible} setVisible={setVisible}>
+        {modalContent}
+      </Modal>
     </Header>
   );
 };

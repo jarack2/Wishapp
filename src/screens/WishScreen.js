@@ -17,7 +17,6 @@ const WishScreen = (props) => {
     snapshot.docs.forEach(doc => {
          let wishDoc = doc.data();
          wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
-         console.log(wishDoc);
      });
     if(wishListData == null){
       setWishList(wishes);
@@ -42,9 +41,7 @@ const WishScreen = (props) => {
     <>
     <Header title="Wishes" scrollable> 
       {/* Main Content */}
-          <View style={styles.ListContainer}>
             <CardList cards={wishList} /> 
-          </View>
       </Header>
     </>
   );

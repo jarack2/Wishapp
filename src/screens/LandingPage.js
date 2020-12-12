@@ -61,7 +61,6 @@ const LandingPage = (props) => {
     snapshot.docs.forEach(doc => {
          let wishDoc = doc.data();
          wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
-         console.log(wishDoc);
      });
     if(wishListData == null){
       setWishList(wishes);
