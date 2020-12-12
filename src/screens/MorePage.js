@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, Image, Dimensions, Text } from 'react-native';
 
-import { CardList, Header } from '../components';
+import { CardList, Header, Modal} from '../components';
 
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -65,6 +65,7 @@ const options = (navigation) => {
 
 const MorePage = ({ navigation }) => {
   const settings = options(navigation);
+  let modal = true;
   const user = useContext(UserContext); // holds the current user
   return (
     <Header title="More">
@@ -76,6 +77,9 @@ const MorePage = ({ navigation }) => {
         <Text style={styles.text}>Email: {user.email}</Text>
       </View>
       <CardList cards={settings} titleStyles={{ marginLeft: '40%' }} />
+ 
+      { modal ? <Modal/> : undefined }
+
     </Header>
   );
 };

@@ -1,8 +1,29 @@
-import React from 'react';
-import { Modal as XModal, StyleSheet, TouchableHighlight } from 'react-native';
+import React, { Component } from 'react';
+import { Button, Text, View } from 'react-native';
+import Modal from 'react-native-modal';
 
-const Modal = () => {
-  return <XModal></XModal>;
-};
+export default class ModalTester extends Component {
+  state = {
+    isModalVisible: false,
+  };
 
-export default Modal;
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <Button title="Show modal" onPress={this.toggleModal} />
+        {this.state.isModalVisible ? (
+          <Modal isVisible={this.state.isModalVisible}>
+            <View style={{ flex: 1 }}>
+              <Text>Hello!</Text>
+              <Button title="Hide modal" onPress={this.toggleModal} />
+            </View>
+          </Modal>
+        ) : undefined}
+      </View>
+    );
+  }
+}
