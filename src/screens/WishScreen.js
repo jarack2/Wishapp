@@ -1,49 +1,63 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, ImageBackground, View } from 'react-native';
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  ImageBackground,
+  View,
+} from 'react-native';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
 import { UserContext } from '../providers/UserProvider';
-import { CardList, Header } from '../components';
+import { CardList, Header, Modal } from '../components';
 
 var wishListData = null;
 
 const WishScreen = (props) => {
-
   const [wishList, setWishList] = useState([]);
-  const user = useContext(UserContext); // holds the current user  
-  let wishes =  [];  
+  const [visible, setVisible] = useState(false);
+  const user = useContext(UserContext); // holds the current user
+  let wishes = [];
 
-  firebase.db.collection('wishes').doc(user.uid).collection('wishList').get().then((snapshot) => {
-    snapshot.docs.forEach(doc => {
-         let wishDoc = doc.data();
-         wishes.push({name: wishDoc.title.text, icon: 'sc-telegram', iconType:'evilicon' });
-     });
-    if(wishListData == null){
-      setWishList(wishes);
-      wishListData = wishes;
-    }
-    else{
-      const wishListChanged = (newWishes) => {
-        if (newWishes.length !== wishListData.length) {
-          return true;
-        }
-      };      
-    if (wishListChanged(wishes)) {
-        wishListData = wishes;
+  firebase.db
+    .collection('wishes')
+    .doc(user.uid)
+    .collection('wishList')
+    .get()
+    .then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        let wishDoc = doc.data();
+        wishes.push({
+          name: wishDoc.title.text,
+          icon: 'sc-telegram',
+          iconType: 'evilicon',
+          action: () => setVisible(true),
+        });
+      });
+      if (wishListData == null) {
         setWishList(wishes);
+        wishListData = wishes;
+      } else {
+        const wishListChanged = (newWishes) => {
+          if (newWishes.length !== wishListData.length) {
+            return true;
+          }
+        };
+        if (wishListChanged(wishes)) {
+          wishListData = wishes;
+          setWishList(wishes);
+        }
       }
-    }
-});
-
-
+    });
 
   return (
-    <>
-    <Header title="Wishes" scrollable> 
+    <Header title="Wishes" scrollable>
       {/* Main Content */}
-            <CardList cards={wishList} /> 
-      </Header>
-    </>
+      <CardList cards={wishList} />
+      <Modal title={'Wish'} visible={visible} setVisible={setVisible}>
+        {/* wish content here */}
+      </Modal>
+    </Header>
   );
 };
 const styles = StyleSheet.create({
