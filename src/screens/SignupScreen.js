@@ -6,6 +6,9 @@ import {
   Text,
   TouchableHighlight,
   View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { TextInput, BackButton } from '../components';
 
@@ -46,6 +49,10 @@ const SignupScreen = (props) => {
             justifyContent: 'flex-end',
           }}
         >
+          <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
           {spinner ? (
             <ActivityIndicator
               size="large"
@@ -85,6 +92,7 @@ const SignupScreen = (props) => {
           >
             <Text style={styles.buttonLabels}>Sign Up</Text>
           </TouchableHighlight>
+          </KeyboardAvoidingView>
         </View>
       </ImageBackground>
     </>
