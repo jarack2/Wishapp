@@ -86,4 +86,14 @@ const styles = StyleSheet.create({
   },
 });
 
+Modal.propTypes = {
+  /* The content of the modal. */
+  children: PropTypes.node,
+  /* The title for the modal. */
+  title: PropTypes.string,
+  /* Props to tell whether the modal is visible or not, controlled from an outside source. */
+  setVisible: PropTypes.func,
+  visible: PropTypes.bool,
+};
+
 export default Modal;
