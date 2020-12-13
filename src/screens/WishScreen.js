@@ -5,6 +5,7 @@ import {
   ScrollView,
   ImageBackground,
   View,
+  Text
 } from 'react-native';
 import firebase from '../../firebaseConfig';
 import 'firebase/firestore';
@@ -16,6 +17,8 @@ var wishListData = null;
 const WishScreen = (props) => {
   const [wishList, setWishList] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [fullWish, setFullWish] = useState("");
+  const [date, setDate] = useState(new Date());
   const user = useContext(UserContext); // holds the current user
   let wishes = [];
 
@@ -31,7 +34,7 @@ const WishScreen = (props) => {
           name: wishDoc.title.text,
           icon: 'sc-telegram',
           iconType: 'evilicon',
-          action: () => setVisible(true),
+          action: () => openModal(wishDoc.title.text),
         });
       });
       if (wishListData == null) {
@@ -50,16 +53,42 @@ const WishScreen = (props) => {
       }
     });
 
+    const openModal = (title) =>  {
+      setVisible(true);
+      firebase.db
+      .collection('wishes')
+      .doc(user.uid)
+      .collection('wishList')
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          let wishDoc = doc.data();
+          if(wishDoc.title.text === title){
+            setFullWish(wishDoc.wish.text);                        
+            setDate(wishDoc.date.toDate());          
+          }                      
+        });
+      }
+      )};
+      
   return (
     <Header title="Wishes" scrollable>
       {/* Main Content */}
       <CardList cards={wishList} />
       <Modal title={'Wish'} visible={visible} setVisible={setVisible}>
-        {/* wish content here */}
+        <View>
+          <Text>
+            {fullWish}
+          </Text>
+          <Text>
+            {date.toString()}
+          </Text>
+        </View>
       </Modal>
     </Header>
   );
 };
+
 const styles = StyleSheet.create({
   ListContainer: {
     flex: 1,
