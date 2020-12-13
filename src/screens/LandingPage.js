@@ -119,7 +119,9 @@ const LandingPage = (props) => {
         />
         <View style={styles.container}>
 
-          <CardList cards={wishList} />
+          <CardList cards={wishList.slice(0,3)} 
+          titleStyles={{ marginLeft: 0 }}
+          />
           </View> 
         </Header>
      

@@ -8,8 +8,10 @@ const TextInput = ({ errorText, ...props }) => (
       style={styles.input}
       underlineColor="transparent"
       mode="outlined"
+      keyboardType= "email-address"
       {...props}
     />
+    
     {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
   </View>
 );

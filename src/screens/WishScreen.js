@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  
   image: {
     flex: 1,
     resizeMode: 'cover',

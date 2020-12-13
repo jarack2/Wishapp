@@ -6,8 +6,13 @@ import {
   Text,
   TouchableHighlight,
   TouchableOpacity, 
-  View
+  View,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
+
+
 
 import {
   TextInput, 
@@ -32,6 +37,7 @@ const Login = (props) => {
   const [spinner, setSpinner] = useState(false);
   
   return (
+
     <View style={styles.container}>
       <ImageBackground
         source={require('../assets/background.png')}
@@ -42,6 +48,7 @@ const Login = (props) => {
          onPress={() => props.navigation.navigate('Home')}
         />
         <Text style={styles.title}>WishApp</Text>
+        
         <View
           style={{
             flex: 1,
@@ -49,6 +56,10 @@ const Login = (props) => {
             justifyContent: 'flex-end',
           }}
         >
+          <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
            {spinner ? <ActivityIndicator size="large" color="#00ff00" style={styles.spinner}/> : undefined}
         <TextInput
          placeholder="Email"
@@ -88,7 +99,9 @@ const Login = (props) => {
           {/* <TouchableHighlight onPress={() => firebase.auth().signOut()}>
           <Text style={styles.buttonLabels}>Logout</Text> 
           </TouchableHighlight> */}
+          </KeyboardAvoidingView>
         </View>
+        
       </ImageBackground>
     </View>
   );
@@ -108,6 +121,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: 'red',
+    textAlign: 'center',
   },
   forgotPassword: {
     width: '100%',

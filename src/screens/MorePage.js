@@ -112,19 +112,20 @@ const MorePage = ({ navigation }) => {
 const styles = StyleSheet.create({
   userView: {
     padding: 20,
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
   image: {
     width: screenHeight / 12,
     height: screenHeight / 12,
     borderRadius: 200 / 2,
     marginRight: 48,
+    marginLeft: 48,
   },
   container: {
     alignItems: 'center',
   },
   text: {
-    color: 'white',
+    color: 'black',
   },
 });
 
